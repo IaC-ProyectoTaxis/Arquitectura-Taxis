@@ -1,10 +1,10 @@
 const { Client } = require('pg');
 
 exports.handler = async (event) => {
-  const { user_id, placa, fecha, origen, destino, precio } = JSON.parse(event.body);
+  const { placa, color, modelo, conductor } = JSON.parse(event.body);
 
   // Validar si faltan datos
-  if (!user_id || !placa || !origen || !destino || !precio) {
+  if (!placa || !color || !modelo || !conductor) {
     return {
       statusCode: 400,
       body: JSON.stringify({ message: 'Faltan datos obligatorios.' })
@@ -25,8 +25,8 @@ exports.handler = async (event) => {
     await client.connect();
 
     // Consulta para insertar los datos
-    const query = 'INSERT INTO viajes (user_id, placa, fecha, origen, destino, precio) VALUES ($1, $2, $3, $4, $5, $6)'; //Asignacion y orden de las columnas
-    await client.query(query, [user_id, placa, fecha, origen, destino, precio]);
+    const query = 'INSERT INTO taxis (placa, color, modelo, conductor) VALUES ($1, $2, $3, $4)';
+    await client.query(query, [placa, color, modelo, conductor]);
 
     await client.end();
 
