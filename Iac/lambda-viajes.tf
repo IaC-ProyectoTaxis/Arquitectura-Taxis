@@ -3,6 +3,21 @@ data "archive_file" "lambda_viajes" {
   source_dir  = "${path.module}/../viajes"
   output_path = "${path.module}/bin/viajes.zip"
 }
+resource "aws_iam_role" "lambda_taxis_exec_role" { //Rol Necesario para ejecutar el recurso lambda
+  name = "taxis_exec_role"
+  assume_role_policy = jsonencode({
+    "Version" : "2012-10-17",
+    "Statement" : [
+      {
+        "Effect" : "Allow",
+        "Principal" : {
+          "Service" : "lambda.amazonaws.com"
+        },
+        "Action" : "sts:AssumeRole"
+      }
+    ]
+  })
+}
 resource "aws_lambda_function" "viajes" {
   function_name    = "viajes"
   handler          = "index.handler"
