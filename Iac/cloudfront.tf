@@ -50,3 +50,26 @@ resource "aws_cloudfront_distribution" "cdn" {
     Name = "cloudfront-cdn"
   }
 }
+
+
+resource "aws_cloudfront_response_headers_policy" "cors_policy" {
+  name = "AllowCORSCloudFront"
+
+  cors_config {
+    access_control_allow_credentials = true
+
+    access_control_allow_headers {
+      items = ["Content-Type", "Authorization"]
+    }
+
+    access_control_allow_methods {
+      items = ["GET", "POST", "OPTIONS"]
+    }
+
+    access_control_allow_origins {
+      items = ["*"]
+    }
+
+    origin_override = true
+  }
+}
