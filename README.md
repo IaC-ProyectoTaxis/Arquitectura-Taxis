@@ -17,6 +17,8 @@ Desarrollar una solución en la nube para gestionar de forma eficiente una flota
 * Aplicar buenas prácticas de seguridad mediante el uso de WAF y control de acceso IAM para los recursos.
 * Documentar y versionar el proyecto en un repositorio Git con estructura clara y archivos descriptivos.
 
+![Arquitectura](https://github.com/user-attachments/assets/1fe3874d-7452-4939-987f-0bfbf9298d6a)
+
 Comandos:
 Para ejecutar el proyecto
 
