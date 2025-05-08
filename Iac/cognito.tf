@@ -1,10 +1,3 @@
-resource "aws_api_gateway_authorizer" "cognito_auth" {
-  name                   = "CognitoAuthorizer"
-  rest_api_id            = aws_api_gateway_rest_api.api.id
-  identity_source        = "method.request.header.Authorization"
-  type                   = "COGNITO_USER_POOLS"
-  provider_arns          = [aws_cognito_user_pool.main_pool.arn]
-}
 resource "aws_cognito_user_pool" "main_pool" {
   name = "usuarios-pool"
 
@@ -46,7 +39,6 @@ resource "aws_cognito_user_pool_client" "frontend_client" {
   ]
 
   supported_identity_providers = ["COGNITO"]
-
   callback_urls = ["https://dhdqrwclpir4.cloudfront.net/"]
   logout_urls   = ["https://dhdqrwclpir4.cloudfront.net/"]
 }
