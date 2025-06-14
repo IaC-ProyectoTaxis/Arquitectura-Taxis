@@ -56,6 +56,8 @@ resource "aws_lambda_function" "taxis" {
   filename         = data.archive_file.lambda_taxis.output_path
   source_code_hash = data.archive_file.lambda_taxis.output_base64sha512
 
+  code_signing_config_arn = aws_lambda_function.viajes.code_signing_config_arn
+
   environment {
     variables = {
       DB_HOST     = "db-taxis-viajes-usuarios.cbmia0266pjz.us-east-2.rds.amazonaws.com" //endpoint
