@@ -92,4 +92,13 @@ resource "aws_cloudfront_response_headers_policy" "cors_policy" {
 
     origin_override = true
   }
+
+  security_headers_config {
+    strict_transport_security {
+      access_control_max_age_sec = 31536000
+      include_subdomains         = true
+      override                   = true
+      preload                    = true
+    }
+  }
 }
