@@ -72,6 +72,10 @@ resource "aws_lambda_function" "usuarios" {
     target_arn = "test"
   }
 
+  tracing_config {
+    mode = "Active"
+  }
+
   vpc_config {
     subnet_ids         = [
                           data.aws_subnet.public1-us-east-2a.id, //Definir a que subnet ira la lambda
