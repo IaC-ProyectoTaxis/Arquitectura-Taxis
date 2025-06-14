@@ -88,6 +88,8 @@ resource "aws_lambda_function" "taxis" {
 
 resource "aws_kms_key" "lambda_taxis_key" {
   description = "Clave kms para cifrar variables de entorno de la Lambda Taxis"
+  is_enabled = true
+  enable_key_rotation = true
 }
 
 data "aws_subnet" "public1-us-east-2a" {
