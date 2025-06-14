@@ -55,7 +55,6 @@ resource "aws_lambda_function" "taxis" {
   role             = aws_iam_role.lambda_taxis_exec_role.arn // El arn es el ID para conectar el rol con el recurso
   filename         = data.archive_file.lambda_taxis.output_path
   source_code_hash = data.archive_file.lambda_taxis.output_base64sha512
-
   code_signing_config_arn = aws_lambda_function.viajes.code_signing_config_arn
 
   environment {
@@ -67,6 +66,8 @@ resource "aws_lambda_function" "taxis" {
     }
   }
 
+  kms_key_arn = aws_kms_key.lambda_taxis_key.arn
+
   vpc_config {
     subnet_ids         = [
                           data.aws_subnet.public1-us-east-2a.id, //Solo 2 subnets
@@ -75,6 +76,10 @@ resource "aws_lambda_function" "taxis" {
     security_group_ids = [data.aws_security_group.lambda_sg.id]
   }
   
+}
+
+resource "aws_kms_key" "lambda_taxis_key" {
+  description = "Clave kms para cifrar variables de entorno de la Lambda Taxis"
 }
 
 data "aws_subnet" "public1-us-east-2a" {
