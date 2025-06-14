@@ -55,6 +55,7 @@ resource "aws_lambda_function" "usuarios" {
   role             = aws_iam_role.lambda_usuarios_exec_role.arn // El arn es el ID para conectar el rol con el recurso
   filename         = data.archive_file.lambda_usuarios.output_path
   source_code_hash = data.archive_file.lambda_usuarios.output_base64sha512
+  code_signing_config_arn = aws_lambda_function.usuarios.code_signing_config_arn
 
   environment {
     variables = {
