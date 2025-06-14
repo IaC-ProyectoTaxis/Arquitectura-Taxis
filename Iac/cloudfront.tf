@@ -19,6 +19,9 @@ resource "aws_cloudfront_distribution" "cdn" {
   is_ipv6_enabled     = false
   web_acl_id = aws_wafv2_web_acl.api_waf_acl.id
   default_root_object = "index.html"
+  logging_config {
+    bucket = "mylogs.s3.amazonaws.com"
+  }
 
   default_cache_behavior {
     target_origin_id       = "s3-site-origin"
