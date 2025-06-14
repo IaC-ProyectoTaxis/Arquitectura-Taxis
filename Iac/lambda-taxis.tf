@@ -67,6 +67,7 @@ resource "aws_lambda_function" "taxis" {
   }
 
   kms_key_arn = aws_kms_key.lambda_taxis_key.arn
+  reserved_concurrent_executions = 100
 
   vpc_config {
     subnet_ids         = [
