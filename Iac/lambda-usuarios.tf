@@ -51,7 +51,7 @@ resource "aws_iam_role_policy_attachment" "AWSLambdaVPCAccessExecutionRole_usuar
 resource "aws_lambda_function" "usuarios" {
   function_name    = "usuarios"
   handler          = "index.handler"
-  runtime          = "nodejs16.x"
+  runtime          = "nodejs18.x"
   role             = aws_iam_role.lambda_usuarios_exec_role.arn // El arn es el ID para conectar el rol con el recurso
   filename         = data.archive_file.lambda_usuarios.output_path
   source_code_hash = data.archive_file.lambda_usuarios.output_base64sha512
@@ -67,6 +67,10 @@ resource "aws_lambda_function" "usuarios" {
   }
 
   kms_key_arn = aws_kms_key.lambda_usuarios_key.arn
+  reserved_concurrent_executions = 100
+  dead_letter_config {
+    target_arn = "test"
+  }
 
   vpc_config {
     subnet_ids         = [
