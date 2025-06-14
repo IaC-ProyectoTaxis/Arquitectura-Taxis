@@ -16,6 +16,8 @@ resource "aws_cloudfront_distribution" "cdn" {
   }
 
   enabled             = true
+  is_ipv6_enabled     = false
+  web_acl_id = aws_wafv2_web_acl.api_waf_acl.id
   default_root_object = "index.html"
 
   default_cache_behavior {
