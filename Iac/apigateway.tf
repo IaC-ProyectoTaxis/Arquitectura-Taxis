@@ -17,6 +17,7 @@ resource "aws_api_gateway_method" "post_registro" {
   resource_id   = aws_api_gateway_resource.registro.id
   http_method   = "POST"
   authorization = "NONE"
+  api_key_required = true
 }
 
 resource "aws_api_gateway_integration" "lambda_post_registro_usuario" {
