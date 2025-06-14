@@ -66,6 +66,8 @@ resource "aws_lambda_function" "usuarios" {
     }
   }
 
+  kms_key_arn = aws_kms_key.lambda_usuarios_key.arn
+
   vpc_config {
     subnet_ids         = [
                           data.aws_subnet.public1-us-east-2a.id, //Definir a que subnet ira la lambda
@@ -74,6 +76,12 @@ resource "aws_lambda_function" "usuarios" {
     security_group_ids = [data.aws_security_group.lambda_sg.id] //Definir el security group
   }
   
+}
+
+resource "aws_kms_key" "lambda_usuarios_key" {
+  description = "Clave kms para cifrar variables de entorno de la Lambda Usuarios"
+  is_enabled = true
+  enable_key_rotation = true
 }
 
 resource "aws_lambda_permission" "allow_s3_usuarios" { //Permiso para que el s3 pueda invocar el lambda
