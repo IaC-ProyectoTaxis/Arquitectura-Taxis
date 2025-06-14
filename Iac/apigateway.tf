@@ -1,6 +1,9 @@
 resource "aws_api_gateway_rest_api" "api" {
   name        = "api-taxis"
   description = "API para registrar datos desde el frontend"
+  lifecycle {
+    create_before_destroy = true
+  }
 }
 
 resource "aws_api_gateway_resource" "registro" {
