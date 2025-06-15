@@ -1,6 +1,6 @@
 <?xml version="1.0" ?>
-<testsuites disabled="0" errors="0" failures="8" tests="159" time="0.0">
-	<testsuite disabled="0" errors="0" failures="5" name="terraform scan" skipped="0" tests="156" time="0">
+<testsuites disabled="0" errors="0" failures="7" tests="170" time="0.0">
+	<testsuite disabled="0" errors="0" failures="4" name="terraform scan" skipped="0" tests="167" time="0">
 		<properties>
 			<property name="directory" value="['C:\\Users\\Admin\\Documents\\Arquitectura-Taxis\\Iac']"/>
 			<property name="add_check" value="False"/>
@@ -122,6 +122,14 @@
 		<testcase name="[NONE][CKV_AWS_274] Disallow IAM roles, users, and groups from using the AWS AdministratorAccess policy" classname="\lambda-viajes.tf.aws_iam_role.lambda_viajes_exec_role" file="\lambda-viajes.tf"/>
 		<testcase name="[NONE][CKV_AWS_61] Ensure AWS IAM policy does not allow assume role permission across all services" classname="\lambda-viajes.tf.aws_iam_role.lambda_viajes_exec_role" file="\lambda-viajes.tf"/>
 		<testcase name="[NONE][CKV_AWS_60] Ensure IAM role allows only specific services or principals to assume it" classname="\lambda-viajes.tf.aws_iam_role.lambda_viajes_exec_role" file="\lambda-viajes.tf"/>
+		<testcase name="[NONE][CKV_AWS_62] Ensure IAM policies that allow full &quot;*-*&quot; administrative privileges are not created" classname="\lambda-viajes.tf.aws_iam_role_policy.lambda_dlq_policy" file="\lambda-viajes.tf"/>
+		<testcase name="[NONE][CKV_AWS_287] Ensure IAM policies does not allow credentials exposure" classname="\lambda-viajes.tf.aws_iam_role_policy.lambda_dlq_policy" file="\lambda-viajes.tf"/>
+		<testcase name="[NONE][CKV_AWS_288] Ensure IAM policies does not allow data exfiltration" classname="\lambda-viajes.tf.aws_iam_role_policy.lambda_dlq_policy" file="\lambda-viajes.tf"/>
+		<testcase name="[NONE][CKV_AWS_289] Ensure IAM policies does not allow permissions management / resource exposure without constraints" classname="\lambda-viajes.tf.aws_iam_role_policy.lambda_dlq_policy" file="\lambda-viajes.tf"/>
+		<testcase name="[NONE][CKV_AWS_286] Ensure IAM policies does not allow privilege escalation" classname="\lambda-viajes.tf.aws_iam_role_policy.lambda_dlq_policy" file="\lambda-viajes.tf"/>
+		<testcase name="[NONE][CKV_AWS_63] Ensure no IAM policies documents allow &quot;*&quot; as a statement's actions" classname="\lambda-viajes.tf.aws_iam_role_policy.lambda_dlq_policy" file="\lambda-viajes.tf"/>
+		<testcase name="[NONE][CKV_AWS_355] Ensure no IAM policies documents allow &quot;*&quot; as a statement's resource for restrictable actions" classname="\lambda-viajes.tf.aws_iam_role_policy.lambda_dlq_policy" file="\lambda-viajes.tf"/>
+		<testcase name="[NONE][CKV_AWS_290] Ensure IAM policies does not allow write access without constraints" classname="\lambda-viajes.tf.aws_iam_role_policy.lambda_dlq_policy" file="\lambda-viajes.tf"/>
 		<testcase name="[NONE][CKV_AWS_62] Ensure IAM policies that allow full &quot;*-*&quot; administrative privileges are not created" classname="\lambda-viajes.tf.aws_iam_role_policy.lambda_xray_policy" file="\lambda-viajes.tf"/>
 		<testcase name="[NONE][CKV_AWS_287] Ensure IAM policies does not allow credentials exposure" classname="\lambda-viajes.tf.aws_iam_role_policy.lambda_xray_policy" file="\lambda-viajes.tf"/>
 		<testcase name="[NONE][CKV_AWS_288] Ensure IAM policies does not allow data exfiltration" classname="\lambda-viajes.tf.aws_iam_role_policy.lambda_xray_policy" file="\lambda-viajes.tf"/>
@@ -140,8 +148,11 @@
 		<testcase name="[NONE][CKV_AWS_290] Ensure IAM policies does not allow write access without constraints" classname="\lambda-viajes.tf.aws_iam_policy.lambda_policy_viajes" file="\lambda-viajes.tf"/>
 		<testcase name="[NONE][CKV_AWS_274] Disallow IAM roles, users, and groups from using the AWS AdministratorAccess policy" classname="\lambda-viajes.tf.aws_iam_role_policy_attachment.lambda_policy_attachment_viajes" file="\lambda-viajes.tf"/>
 		<testcase name="[NONE][CKV_AWS_274] Disallow IAM roles, users, and groups from using the AWS AdministratorAccess policy" classname="\lambda-viajes.tf.aws_iam_role_policy_attachment.AWSLambdaVPCAccessExecutionRole_viajes" file="\lambda-viajes.tf"/>
+		<testcase name="[NONE][CKV_AWS_27] Ensure all data stored in the SQS queue is encrypted" classname="\lambda-viajes.tf.aws_sqs_queue.lambda_dlq" file="\lambda-viajes.tf"/>
+		<testcase name="[NONE][CKV_AWS_168] Ensure SQS queue policy is not public by only allowing specific services or principals to access it" classname="\lambda-viajes.tf.aws_sqs_queue.lambda_dlq" file="\lambda-viajes.tf"/>
 		<testcase name="[NONE][CKV_AWS_363] Ensure Lambda Runtime is not deprecated" classname="\lambda-viajes.tf.aws_lambda_function.viajes" file="\lambda-viajes.tf"/>
 		<testcase name="[NONE][CKV_AWS_272] Ensure AWS Lambda function is configured to validate code-signing" classname="\lambda-viajes.tf.aws_lambda_function.viajes" file="\lambda-viajes.tf"/>
+		<testcase name="[NONE][CKV_AWS_116] Ensure that AWS Lambda function is configured for a Dead Letter Queue(DLQ)" classname="\lambda-viajes.tf.aws_lambda_function.viajes" file="\lambda-viajes.tf"/>
 		<testcase name="[NONE][CKV_AWS_45] Ensure no hard-coded secrets exist in lambda environment" classname="\lambda-viajes.tf.aws_lambda_function.viajes" file="\lambda-viajes.tf"/>
 		<testcase name="[NONE][CKV_AWS_173] Check encryption settings for Lambda environmental variable" classname="\lambda-viajes.tf.aws_lambda_function.viajes" file="\lambda-viajes.tf"/>
 		<testcase name="[NONE][CKV_AWS_115] Ensure that AWS Lambda function is configured for function-level concurrent execution limit" classname="\lambda-viajes.tf.aws_lambda_function.viajes" file="\lambda-viajes.tf"/>
@@ -158,11 +169,11 @@
 		<testcase name="[NONE][CKV_AWS_342] Ensure WAF rule has any actions" classname="\waf-api.tf.aws_wafv2_web_acl.api_waf_acl" file="\waf-api.tf"/>
 		<testcase name="[NONE][CKV2_AWS_53] Ensure AWS API gateway request is validated" classname="\apigateway.tf.aws_api_gateway_method.post_registro" file="\apigateway.tf"/>
 		<testcase name="[NONE][CKV2_AWS_53] Ensure AWS API gateway request is validated" classname="\apigateway.tf.aws_api_gateway_method.options_registro" file="\apigateway.tf"/>
-		<testcase name="[NONE][CKV2_AWS_72] Ensure AWS CloudFront origin protocol policy enforces HTTPS-only" classname="\cloudfront.tf.aws_cloudfront_distribution.cdn" file="\cloudfront.tf"/>
 		<testcase name="[NONE][CKV2_AWS_42] Ensure AWS CloudFront distribution uses custom SSL certificate" classname="\cloudfront.tf.aws_cloudfront_distribution.cdn" file="\cloudfront.tf"/>
 		<testcase name="[NONE][CKV2_AWS_32] Ensure CloudFront distribution has a response headers policy attached" classname="\cloudfront.tf.aws_cloudfront_distribution.cdn" file="\cloudfront.tf"/>
-		<testcase name="[NONE][CKV2_AWS_54] Ensure AWS CloudFront distribution is using secure SSL protocols for HTTPS communication" classname="\cloudfront.tf.aws_cloudfront_distribution.cdn" file="\cloudfront.tf"/>
+		<testcase name="[NONE][CKV2_AWS_72] Ensure AWS CloudFront origin protocol policy enforces HTTPS-only" classname="\cloudfront.tf.aws_cloudfront_distribution.cdn" file="\cloudfront.tf"/>
 		<testcase name="[NONE][CKV2_AWS_46] Ensure AWS CloudFront Distribution with S3 have Origin Access set to enabled" classname="\cloudfront.tf.aws_cloudfront_distribution.cdn" file="\cloudfront.tf"/>
+		<testcase name="[NONE][CKV2_AWS_54] Ensure AWS CloudFront distribution is using secure SSL protocols for HTTPS communication" classname="\cloudfront.tf.aws_cloudfront_distribution.cdn" file="\cloudfront.tf"/>
 		<testcase name="[NONE][CKV2_AWS_56] Ensure AWS Managed IAMFullAccess IAM policy is not used." classname="\lambda-taxis.tf.aws_iam_role.lambda_taxis_exec_role" file="\lambda-taxis.tf"/>
 		<testcase name="[NONE][CKV2_AWS_56] Ensure AWS Managed IAMFullAccess IAM policy is not used." classname="\lambda-taxis.tf.aws_iam_role_policy_attachment.AWSLambdaVPCAccessExecutionRole" file="\lambda-taxis.tf"/>
 		<testcase name="[NONE][CKV2_AWS_56] Ensure AWS Managed IAMFullAccess IAM policy is not used." classname="\lambda-usuarios.tf.aws_iam_role.lambda_usuarios_exec_role" file="\lambda-usuarios.tf"/>
@@ -175,6 +186,7 @@
 		<testcase name="[NONE][CKV2_AWS_62] Ensure S3 buckets should have event notifications enabled" classname="\S3.tf.aws_s3_bucket.bucket" file="\S3.tf"/>
 		<testcase name="[NONE][CKV2_AWS_40] Ensure AWS IAM policy does not allow full IAM privileges" classname="\lambda-taxis.tf.aws_iam_policy.lambda_policy" file="\lambda-taxis.tf"/>
 		<testcase name="[NONE][CKV2_AWS_40] Ensure AWS IAM policy does not allow full IAM privileges" classname="\lambda-usuarios.tf.aws_iam_policy.lambda_policy_usuarios" file="\lambda-usuarios.tf"/>
+		<testcase name="[NONE][CKV2_AWS_40] Ensure AWS IAM policy does not allow full IAM privileges" classname="\lambda-viajes.tf.aws_iam_role_policy.lambda_dlq_policy" file="\lambda-viajes.tf"/>
 		<testcase name="[NONE][CKV2_AWS_40] Ensure AWS IAM policy does not allow full IAM privileges" classname="\lambda-viajes.tf.aws_iam_role_policy.lambda_xray_policy" file="\lambda-viajes.tf"/>
 		<testcase name="[NONE][CKV2_AWS_40] Ensure AWS IAM policy does not allow full IAM privileges" classname="\lambda-viajes.tf.aws_iam_policy.lambda_policy_viajes" file="\lambda-viajes.tf"/>
 		<testcase name="[NONE][CKV2_AWS_61] Ensure that an S3 bucket has a lifecycle configuration" classname="\S3.tf.aws_s3_bucket.bucket" file="\S3.tf"/>
@@ -188,48 +200,6 @@
 		<testcase name="[NONE][CKV2_AWS_64] Ensure KMS key Policy is defined" classname="\lambda-taxis.tf.aws_kms_key.lambda_taxis_key" file="\lambda-taxis.tf"/>
 		<testcase name="[NONE][CKV2_AWS_64] Ensure KMS key Policy is defined" classname="\lambda-usuarios.tf.aws_kms_key.lambda_usuarios_key" file="\lambda-usuarios.tf"/>
 		<testcase name="[NONE][CKV2_AWS_64] Ensure KMS key Policy is defined" classname="\lambda-viajes.tf.aws_kms_key.lambda_env_key" file="\lambda-viajes.tf"/>
-		<testcase name="[NONE][CKV_AWS_116] Ensure that AWS Lambda function is configured for a Dead Letter Queue(DLQ)" classname="\lambda-viajes.tf.aws_lambda_function.viajes" file="\lambda-viajes.tf">
-			<failure type="failure" message="Ensure that AWS Lambda function is configured for a Dead Letter Queue(DLQ)">
-Resource: aws_lambda_function.viajes
-File: \lambda-viajes.tf: 70-103
-Guideline: https://docs.prismacloud.io/en/enterprise-edition/policy-reference/aws-policies/aws-general-policies/ensure-that-aws-lambda-function-is-configured-for-a-dead-letter-queue-dlq
-
-		70  | resource "aws_lambda_function" "viajes" {
-		71  |   function_name    = "viajes"
-		72  |   handler          = "index.handler"
-		73  |   runtime          = "nodejs20.x"
-		74  |   role             = aws_iam_role.lambda_viajes_exec_role.arn // El arn es el ID para conectar el rol con el recurso
-		75  |   filename         = data.archive_file.lambda_viajes.output_path
-		76  |   source_code_hash = data.archive_file.lambda_viajes.output_base64sha512
-		77  | 
-		78  |   environment {
-		79  |     variables = {
-		80  |       DB_HOST     = "db-taxis-viajes-usuarios.cbmia0266pjz.us-east-2.rds.amazonaws.com" //endpoint
-		81  |       DB_USER     = "IACgrupo7" //master username
-		82  |       DB_PASSWORD = "grupo7_rds" //password
-		83  |       DB_NAME     = "db-taxis-viajes-usuarios"
-		84  |     }
-		85  |   }
-		86  | 
-		87  |   kms_key_arn = aws_kms_key.lambda_env_key.arn
-		88  |   reserved_concurrent_executions = 50 
-		89  |   tracing_config {
-		90  |     mode = "Active"
-		91  |   }
-		92  | 
-		93  |   vpc_config {
-		94  |     subnet_ids         = [
-		95  |                           data.aws_subnet.public1-us-east-2a.id, //Definir a que subnet ira la lambda
-		96  |                           data.aws_subnet.public2-us-east-2b.id
-		97  |                           ]
-		98  |     security_group_ids = [data.aws_security_group.lambda_sg.id] //Definir el security group
-		99  |   }
-		100 |   
-		101 |   code_signing_config_arn = aws_lambda_code_signing_config.example.arn
-		102 |   
-		103 | }
-</failure>
-		</testcase>
 		<testcase name="[NONE][CKV2_AWS_47] Ensure AWS CloudFront attached WAFv2 WebACL is configured with AMR for Log4j Vulnerability" classname="\cloudfront.tf.aws_cloudfront_distribution.cdn" file="\cloudfront.tf">
 			<failure type="failure" message="Ensure AWS CloudFront attached WAFv2 WebACL is configured with AMR for Log4j Vulnerability">
 Resource: aws_cloudfront_distribution.cdn
@@ -357,10 +327,10 @@ Guideline: https://docs.prismacloud.io/en/enterprise-edition/policy-reference/se
 		<testcase name="[NONE][CKV_SECRET_6] Base64 High Entropy String" classname="/lambda-viajes.tf.fe5ad95e8d71938a6c7f0db06c528d030788b678" file="/lambda-viajes.tf">
 			<failure type="failure" message="Base64 High Entropy String">
 Resource: fe5ad95e8d71938a6c7f0db06c528d030788b678
-File: /lambda-viajes.tf: 82-83
+File: /lambda-viajes.tf: 106-107
 Guideline: https://docs.prismacloud.io/en/enterprise-edition/policy-reference/secrets-policies/secrets-policy-index/git-secrets-6
 
-		82 |       DB_PASSWORD = "gr**********" //password
+		106 |       DB_PASSWORD = "gr**********" //password
 </failure>
 		</testcase>
 	</testsuite>
