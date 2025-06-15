@@ -103,7 +103,17 @@ resource "aws_api_gateway_method" "options_registro" {
   resource_id   = aws_api_gateway_resource.registro.id
   http_method   = "OPTIONS"
   authorization = "NONE"
+  request_validator_id = aws_api_gateway_request_validator.validate_options.id
 }
+
+
+resource "aws_api_gateway_request_validator" "validate_options" {
+  rest_api_id                = aws_api_gateway_rest_api.api.id
+  name                       = "validate-options-request"
+  validate_request_body      = false
+  validate_request_parameters = true
+}
+
 
 resource "aws_api_gateway_integration" "options_mock" {
   rest_api_id          = aws_api_gateway_rest_api.api.id
