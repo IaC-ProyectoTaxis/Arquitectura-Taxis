@@ -65,6 +65,8 @@ resource "aws_lambda_function" "viajes" {
     }
   }
 
+  kms_key_arn = aws_kms_key.lambda_env_key.arn
+  
   vpc_config {
     subnet_ids         = [
                           data.aws_subnet.public1-us-east-2a.id, //Definir a que subnet ira la lambda
@@ -90,6 +92,12 @@ resource "aws_lambda_code_signing_config" "viajes_signing_config" {
   policies {
     untrusted_artifact_on_deployment = "Enforce"
   }
+}
+
+resource "aws_kms_key" "lambda_env_key" {
+  description         = "Clave KMS para cifrado de variables de entorno Lambda"
+  deletion_window_in_days = 10
+  enable_key_rotation = true
 }
 
 resource "aws_lambda_permission" "allow_s3_viajes" { //Permiso para que el s3 pueda invocar el lambda
