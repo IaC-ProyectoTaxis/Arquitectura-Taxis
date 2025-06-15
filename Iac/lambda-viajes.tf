@@ -67,6 +67,9 @@ resource "aws_lambda_function" "viajes" {
 
   kms_key_arn = aws_kms_key.lambda_env_key.arn
   reserved_concurrent_executions = 50 
+  tracing_config {
+    mode = "Active"
+  }
 
   vpc_config {
     subnet_ids         = [
