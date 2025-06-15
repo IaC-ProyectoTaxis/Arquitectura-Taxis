@@ -51,7 +51,7 @@ resource "aws_iam_role_policy_attachment" "AWSLambdaVPCAccessExecutionRole_viaje
 resource "aws_lambda_function" "viajes" {
   function_name    = "viajes"
   handler          = "index.handler"
-  runtime          = "nodejs16.x"
+  runtime          = "nodejs20.x"
   role             = aws_iam_role.lambda_viajes_exec_role.arn // El arn es el ID para conectar el rol con el recurso
   filename         = data.archive_file.lambda_viajes.output_path
   source_code_hash = data.archive_file.lambda_viajes.output_base64sha512
@@ -66,7 +66,7 @@ resource "aws_lambda_function" "viajes" {
   }
 
   kms_key_arn = aws_kms_key.lambda_env_key.arn
-  
+
   vpc_config {
     subnet_ids         = [
                           data.aws_subnet.public1-us-east-2a.id, //Definir a que subnet ira la lambda
