@@ -87,10 +87,28 @@ resource "aws_lambda_function" "taxis" {
 }
 
 resource "aws_kms_key" "lambda_taxis_key" {
-  description = "Clave kms para cifrar variables de entorno de la Lambda Taxis"
-  is_enabled = true
-  enable_key_rotation = true
+  description          = "Clave kms para cifrar variables de entorno de la Lambda Taxis"
+  is_enabled           = true
+  enable_key_rotation  = true
+
+  policy = jsonencode({
+    Version = "2012-10-17",
+    Id      = "lambda-kms-key-default-policy",
+    Statement = [
+      {
+        Sid      = "Enable IAM User Permissions",
+        Effect   = "Allow",
+        Principal = {
+          AWS = "arn:aws:iam::${data.aws_caller_identity.current.account_id}:root"
+        },
+        Action   = "kms:*",
+        Resource = "*"
+      }
+    ]
+  })
 }
+
+data "aws_caller_identity" "current" {}
 
 data "aws_subnet" "public1-us-east-2a" {
   id = "subnet-0f3b032d13c823454"

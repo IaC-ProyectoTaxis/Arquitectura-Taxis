@@ -55,8 +55,9 @@ resource "aws_cloudfront_distribution" "cdn" {
   price_class = "PriceClass_100"
 
   viewer_certificate {
-    cloudfront_default_certificate = false
-    minimum_protocol_version = "TLSv1.2_2018"
+    acm_certificate_arn            = "arn:aws:acm:us-east-1:123456789012:certificate/abcde-1234-5678-9012-abcdef123456"
+    ssl_support_method             = "sni-only"
+    minimum_protocol_version       = "TLSv1.2_2018"
   }
 
   restrictions {
