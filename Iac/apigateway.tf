@@ -18,6 +18,15 @@ resource "aws_api_gateway_method" "post_registro" {
   http_method   = "POST"
   authorization = "NONE"
   api_key_required = true
+  request_validator_id = aws_api_gateway_request_validator.validate_body.id
+}
+
+
+resource "aws_api_gateway_request_validator" "validate_body" {
+  rest_api_id = aws_api_gateway_rest_api.api.id
+  name        = "validate-body-only"
+  validate_request_body = true
+  validate_request_parameters = false
 }
 
 resource "aws_api_gateway_integration" "lambda_post_registro_usuario" {
