@@ -86,10 +86,28 @@ resource "aws_lambda_function" "usuarios" {
   
 }
 
+data "aws_caller_identity" "current" {}
+
 resource "aws_kms_key" "lambda_usuarios_key" {
-  description = "Clave kms para cifrar variables de entorno de la Lambda Usuarios"
-  is_enabled = true
-  enable_key_rotation = true
+  description          = "Clave kms para cifrar variables de entorno de la Lambda Usuarios"
+  is_enabled           = true
+  enable_key_rotation  = true
+
+  policy = jsonencode({
+    Version = "2012-10-17",
+    Id      = "lambda-usuarios-kms-key-policy",
+    Statement = [
+      {
+        Sid: "AllowRootAccountFullAccess",
+        Effect: "Allow",
+        Principal: {
+          AWS: "arn:aws:iam::${data.aws_caller_identity.current.account_id}:root"
+        },
+        Action: "kms:*",
+        Resource: "*"
+      }
+    ]
+  })
 }
 
 resource "aws_lambda_permission" "allow_s3_usuarios" { //Permiso para que el s3 pueda invocar el lambda
