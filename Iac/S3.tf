@@ -11,6 +11,14 @@ resource "aws_s3_bucket_public_access_block" "bucket_public_access" {
   restrict_public_buckets = true
 }
 
+resource "aws_s3_bucket_versioning" "bucket_versioning" {
+  bucket = aws_s3_bucket.bucket.id
+
+  versioning_configuration {
+    status = "Enabled"
+  }
+}
+
 resource "aws_s3_bucket_notification" "bucket_notification" {
   bucket = aws_s3_bucket.bucket.id
 
