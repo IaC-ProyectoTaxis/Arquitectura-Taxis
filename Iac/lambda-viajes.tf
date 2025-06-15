@@ -87,7 +87,7 @@ resource "aws_iam_role_policy_attachment" "AWSLambdaVPCAccessExecutionRole_viaje
 
 resource "aws_sqs_queue" "lambda_dlq" {
   name                              = "lambda-viajes-dlq"
-  kms_master_key_id                 = "alias/aws/sqs" 
+  kms_master_key_id                 = "aws_kms_key.lambda_env_key.arn" 
   kms_data_key_reuse_period_seconds = 300            
 }
 
@@ -158,7 +158,7 @@ resource "aws_kms_key" "lambda_env_key" {
         "Sid": "AllowRootAccountFullAccess",
         "Effect": "Allow",
         "Principal": {
-          "AWS": "arn:aws:iam::123456789012:root"
+          "AWS": "arn:aws:iam::923789128997:root"
         },
         "Action": "kms:*",
         "Resource": "*"
