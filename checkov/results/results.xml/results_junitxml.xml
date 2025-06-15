@@ -1,12 +1,12 @@
 <?xml version="1.0" ?>
-<testsuites disabled="0" errors="0" failures="26" tests="140" time="0.0">
-	<testsuite disabled="0" errors="0" failures="21" name="terraform scan" skipped="0" tests="135" time="0">
+<testsuites disabled="0" errors="0" failures="8" tests="159" time="0.0">
+	<testsuite disabled="0" errors="0" failures="5" name="terraform scan" skipped="0" tests="156" time="0">
 		<properties>
-			<property name="directory" value="['/app']"/>
+			<property name="directory" value="['C:\\Users\\Admin\\Documents\\Arquitectura-Taxis\\Iac']"/>
 			<property name="add_check" value="False"/>
 			<property name="list" value="False"/>
 			<property name="output" value="['junitxml']"/>
-			<property name="output_file_path" value="/output/results.xml"/>
+			<property name="output_file_path" value="C:\Users\Admin\Documents\checkov.xml"/>
 			<property name="output_bc_ids" value="False"/>
 			<property name="include_all_checkov_policies" value="True"/>
 			<property name="quiet" value="False"/>
@@ -16,7 +16,7 @@
 			<property name="run_all_external_checks" value="False"/>
 			<property name="soft_fail" value="False"/>
 			<property name="skip_results_upload" value="False"/>
-			<property name="repo_id" value="cli_repo/app"/>
+			<property name="repo_id" value="cli_repo/Iac"/>
 			<property name="branch" value="master"/>
 			<property name="skip_download" value="False"/>
 			<property name="use_enforcement_rules" value="False"/>
@@ -37,570 +37,275 @@
 			<property name="secrets_history_timeout" value="12h"/>
 			<property name="custom_tool_name" value="Checkov"/>
 		</properties>
-		<testcase name="[NONE][CKV_AWS_93] Ensure S3 bucket policy does not lockout all but root user. (Prevent lockouts needing root account fixes)" classname="/S3.tf.aws_s3_bucket.bucket" file="/S3.tf"/>
-		<testcase name="[NONE][CKV_AWS_70] Ensure S3 bucket does not allow an action with any Principal" classname="/S3.tf.aws_s3_bucket_policy.site_policy" file="/S3.tf"/>
-		<testcase name="[NONE][CKV_AWS_93] Ensure S3 bucket policy does not lockout all but root user. (Prevent lockouts needing root account fixes)" classname="/S3.tf.aws_s3_bucket_policy.site_policy" file="/S3.tf"/>
-		<testcase name="[NONE][CKV_AWS_237] Ensure Create before destroy for API Gateway" classname="/apigateway.tf.aws_api_gateway_rest_api.api" file="/apigateway.tf"/>
-		<testcase name="[NONE][CKV_AWS_59] Ensure there is no open access to back-end resources through API" classname="/apigateway.tf.aws_api_gateway_method.post_registro" file="/apigateway.tf"/>
-		<testcase name="[NONE][CKV2_AWS_70] Ensure API gateway method has authorization or API key set" classname="/apigateway.tf.aws_api_gateway_method.post_registro" file="/apigateway.tf"/>
-		<testcase name="[NONE][CKV_AWS_364] Ensure that AWS Lambda function permissions delegated to AWS services are limited by SourceArn or SourceAccount" classname="/apigateway.tf.aws_lambda_permission.api_gw_invoke_lambda" file="/apigateway.tf"/>
-		<testcase name="[NONE][CKV_AWS_301] Ensure that AWS Lambda function is not publicly accessible" classname="/apigateway.tf.aws_lambda_permission.api_gw_invoke_lambda" file="/apigateway.tf"/>
-		<testcase name="[NONE][CKV_AWS_364] Ensure that AWS Lambda function permissions delegated to AWS services are limited by SourceArn or SourceAccount" classname="/apigateway.tf.aws_lambda_permission.api_gw_invoke_lambda_taxi" file="/apigateway.tf"/>
-		<testcase name="[NONE][CKV_AWS_301] Ensure that AWS Lambda function is not publicly accessible" classname="/apigateway.tf.aws_lambda_permission.api_gw_invoke_lambda_taxi" file="/apigateway.tf"/>
-		<testcase name="[NONE][CKV_AWS_364] Ensure that AWS Lambda function permissions delegated to AWS services are limited by SourceArn or SourceAccount" classname="/apigateway.tf.aws_lambda_permission.api_gw_invoke_lambda_viaje" file="/apigateway.tf"/>
-		<testcase name="[NONE][CKV_AWS_301] Ensure that AWS Lambda function is not publicly accessible" classname="/apigateway.tf.aws_lambda_permission.api_gw_invoke_lambda_viaje" file="/apigateway.tf"/>
-		<testcase name="[NONE][CKV_AWS_217] Ensure Create before destroy for API deployments" classname="/apigateway.tf.aws_api_gateway_deployment.api_deploy" file="/apigateway.tf"/>
-		<testcase name="[NONE][CKV_AWS_59] Ensure there is no open access to back-end resources through API" classname="/apigateway.tf.aws_api_gateway_method.options_registro" file="/apigateway.tf"/>
-		<testcase name="[NONE][CKV_AWS_216] Ensure CloudFront distribution is enabled" classname="/cloudfront.tf.aws_cloudfront_distribution.cdn" file="/cloudfront.tf"/>
-		<testcase name="[NONE][CKV_AWS_68] CloudFront Distribution should have WAF enabled" classname="/cloudfront.tf.aws_cloudfront_distribution.cdn" file="/cloudfront.tf"/>
-		<testcase name="[NONE][CKV_AWS_374] Ensure AWS CloudFront web distribution has geo restriction enabled" classname="/cloudfront.tf.aws_cloudfront_distribution.cdn" file="/cloudfront.tf"/>
-		<testcase name="[NONE][CKV_AWS_86] Ensure CloudFront distribution has Access Logging enabled" classname="/cloudfront.tf.aws_cloudfront_distribution.cdn" file="/cloudfront.tf"/>
-		<testcase name="[NONE][CKV_AWS_310] Ensure CloudFront distributions should have origin failover configured" classname="/cloudfront.tf.aws_cloudfront_distribution.cdn" file="/cloudfront.tf"/>
-		<testcase name="[NONE][CKV_AWS_305] Ensure CloudFront distribution has a default root object configured" classname="/cloudfront.tf.aws_cloudfront_distribution.cdn" file="/cloudfront.tf"/>
-		<testcase name="[NONE][CKV_AWS_174] Verify CloudFront Distribution Viewer Certificate is using TLS v1.2" classname="/cloudfront.tf.aws_cloudfront_distribution.cdn" file="/cloudfront.tf"/>
-		<testcase name="[NONE][CKV_AWS_34] Ensure CloudFront distribution ViewerProtocolPolicy is set to HTTPS" classname="/cloudfront.tf.aws_cloudfront_distribution.cdn" file="/cloudfront.tf"/>
-		<testcase name="[NONE][CKV_AWS_259] Ensure CloudFront response header policy enforces Strict Transport Security" classname="/cloudfront.tf.aws_cloudfront_response_headers_policy.cors_policy" file="/cloudfront.tf"/>
-		<testcase name="[NONE][CKV_AWS_274] Disallow IAM roles, users, and groups from using the AWS AdministratorAccess policy" classname="/lambda-taxis.tf.aws_iam_role.lambda_taxis_exec_role" file="/lambda-taxis.tf"/>
-		<testcase name="[NONE][CKV_AWS_61] Ensure AWS IAM policy does not allow assume role permission across all services" classname="/lambda-taxis.tf.aws_iam_role.lambda_taxis_exec_role" file="/lambda-taxis.tf"/>
-		<testcase name="[NONE][CKV_AWS_60] Ensure IAM role allows only specific services or principals to assume it" classname="/lambda-taxis.tf.aws_iam_role.lambda_taxis_exec_role" file="/lambda-taxis.tf"/>
-		<testcase name="[NONE][CKV_AWS_62] Ensure IAM policies that allow full &quot;*-*&quot; administrative privileges are not created" classname="/lambda-taxis.tf.aws_iam_policy.lambda_policy" file="/lambda-taxis.tf"/>
-		<testcase name="[NONE][CKV_AWS_286] Ensure IAM policies does not allow privilege escalation" classname="/lambda-taxis.tf.aws_iam_policy.lambda_policy" file="/lambda-taxis.tf"/>
-		<testcase name="[NONE][CKV_AWS_288] Ensure IAM policies does not allow data exfiltration" classname="/lambda-taxis.tf.aws_iam_policy.lambda_policy" file="/lambda-taxis.tf"/>
-		<testcase name="[NONE][CKV_AWS_290] Ensure IAM policies does not allow write access without constraints" classname="/lambda-taxis.tf.aws_iam_policy.lambda_policy" file="/lambda-taxis.tf"/>
-		<testcase name="[NONE][CKV_AWS_287] Ensure IAM policies does not allow credentials exposure" classname="/lambda-taxis.tf.aws_iam_policy.lambda_policy" file="/lambda-taxis.tf"/>
-		<testcase name="[NONE][CKV_AWS_289] Ensure IAM policies does not allow permissions management / resource exposure without constraints" classname="/lambda-taxis.tf.aws_iam_policy.lambda_policy" file="/lambda-taxis.tf"/>
-		<testcase name="[NONE][CKV_AWS_63] Ensure no IAM policies documents allow &quot;*&quot; as a statement's actions" classname="/lambda-taxis.tf.aws_iam_policy.lambda_policy" file="/lambda-taxis.tf"/>
-		<testcase name="[NONE][CKV_AWS_355] Ensure no IAM policies documents allow &quot;*&quot; as a statement's resource for restrictable actions" classname="/lambda-taxis.tf.aws_iam_policy.lambda_policy" file="/lambda-taxis.tf"/>
-		<testcase name="[NONE][CKV_AWS_274] Disallow IAM roles, users, and groups from using the AWS AdministratorAccess policy" classname="/lambda-taxis.tf.aws_iam_role_policy_attachment.lambda_policy_attachment" file="/lambda-taxis.tf"/>
-		<testcase name="[NONE][CKV_AWS_274] Disallow IAM roles, users, and groups from using the AWS AdministratorAccess policy" classname="/lambda-taxis.tf.aws_iam_role_policy_attachment.AWSLambdaVPCAccessExecutionRole" file="/lambda-taxis.tf"/>
-		<testcase name="[NONE][CKV_AWS_272] Ensure AWS Lambda function is configured to validate code-signing" classname="/lambda-taxis.tf.aws_lambda_function.taxis" file="/lambda-taxis.tf"/>
-		<testcase name="[NONE][CKV_AWS_117] Ensure that AWS Lambda function is configured inside a VPC" classname="/lambda-taxis.tf.aws_lambda_function.taxis" file="/lambda-taxis.tf"/>
-		<testcase name="[NONE][CKV_AWS_173] Check encryption settings for Lambda environmental variable" classname="/lambda-taxis.tf.aws_lambda_function.taxis" file="/lambda-taxis.tf"/>
-		<testcase name="[NONE][CKV_AWS_363] Ensure Lambda Runtime is not deprecated" classname="/lambda-taxis.tf.aws_lambda_function.taxis" file="/lambda-taxis.tf"/>
-		<testcase name="[NONE][CKV_AWS_115] Ensure that AWS Lambda function is configured for function-level concurrent execution limit" classname="/lambda-taxis.tf.aws_lambda_function.taxis" file="/lambda-taxis.tf"/>
-		<testcase name="[NONE][CKV_AWS_116] Ensure that AWS Lambda function is configured for a Dead Letter Queue(DLQ)" classname="/lambda-taxis.tf.aws_lambda_function.taxis" file="/lambda-taxis.tf"/>
-		<testcase name="[NONE][CKV_AWS_50] X-Ray tracing is enabled for Lambda" classname="/lambda-taxis.tf.aws_lambda_function.taxis" file="/lambda-taxis.tf"/>
-		<testcase name="[NONE][CKV_AWS_45] Ensure no hard-coded secrets exist in lambda environment" classname="/lambda-taxis.tf.aws_lambda_function.taxis" file="/lambda-taxis.tf"/>
-		<testcase name="[NONE][CKV_AWS_227] Ensure KMS key is enabled" classname="/lambda-taxis.tf.aws_kms_key.lambda_taxis_key" file="/lambda-taxis.tf"/>
-		<testcase name="[NONE][CKV_AWS_33] Ensure KMS key policy does not contain wildcard (*) principal" classname="/lambda-taxis.tf.aws_kms_key.lambda_taxis_key" file="/lambda-taxis.tf"/>
-		<testcase name="[NONE][CKV_AWS_7] Ensure rotation for customer created CMKs is enabled" classname="/lambda-taxis.tf.aws_kms_key.lambda_taxis_key" file="/lambda-taxis.tf"/>
-		<testcase name="[NONE][CKV_AWS_364] Ensure that AWS Lambda function permissions delegated to AWS services are limited by SourceArn or SourceAccount" classname="/lambda-taxis.tf.aws_lambda_permission.allow_s3" file="/lambda-taxis.tf"/>
-		<testcase name="[NONE][CKV_AWS_301] Ensure that AWS Lambda function is not publicly accessible" classname="/lambda-taxis.tf.aws_lambda_permission.allow_s3" file="/lambda-taxis.tf"/>
-		<testcase name="[NONE][CKV_AWS_274] Disallow IAM roles, users, and groups from using the AWS AdministratorAccess policy" classname="/lambda-usuarios.tf.aws_iam_role.lambda_usuarios_exec_role" file="/lambda-usuarios.tf"/>
-		<testcase name="[NONE][CKV_AWS_61] Ensure AWS IAM policy does not allow assume role permission across all services" classname="/lambda-usuarios.tf.aws_iam_role.lambda_usuarios_exec_role" file="/lambda-usuarios.tf"/>
-		<testcase name="[NONE][CKV_AWS_60] Ensure IAM role allows only specific services or principals to assume it" classname="/lambda-usuarios.tf.aws_iam_role.lambda_usuarios_exec_role" file="/lambda-usuarios.tf"/>
-		<testcase name="[NONE][CKV_AWS_62] Ensure IAM policies that allow full &quot;*-*&quot; administrative privileges are not created" classname="/lambda-usuarios.tf.aws_iam_policy.lambda_policy_usuarios" file="/lambda-usuarios.tf"/>
-		<testcase name="[NONE][CKV_AWS_286] Ensure IAM policies does not allow privilege escalation" classname="/lambda-usuarios.tf.aws_iam_policy.lambda_policy_usuarios" file="/lambda-usuarios.tf"/>
-		<testcase name="[NONE][CKV_AWS_288] Ensure IAM policies does not allow data exfiltration" classname="/lambda-usuarios.tf.aws_iam_policy.lambda_policy_usuarios" file="/lambda-usuarios.tf"/>
-		<testcase name="[NONE][CKV_AWS_290] Ensure IAM policies does not allow write access without constraints" classname="/lambda-usuarios.tf.aws_iam_policy.lambda_policy_usuarios" file="/lambda-usuarios.tf"/>
-		<testcase name="[NONE][CKV_AWS_287] Ensure IAM policies does not allow credentials exposure" classname="/lambda-usuarios.tf.aws_iam_policy.lambda_policy_usuarios" file="/lambda-usuarios.tf"/>
-		<testcase name="[NONE][CKV_AWS_289] Ensure IAM policies does not allow permissions management / resource exposure without constraints" classname="/lambda-usuarios.tf.aws_iam_policy.lambda_policy_usuarios" file="/lambda-usuarios.tf"/>
-		<testcase name="[NONE][CKV_AWS_63] Ensure no IAM policies documents allow &quot;*&quot; as a statement's actions" classname="/lambda-usuarios.tf.aws_iam_policy.lambda_policy_usuarios" file="/lambda-usuarios.tf"/>
-		<testcase name="[NONE][CKV_AWS_355] Ensure no IAM policies documents allow &quot;*&quot; as a statement's resource for restrictable actions" classname="/lambda-usuarios.tf.aws_iam_policy.lambda_policy_usuarios" file="/lambda-usuarios.tf"/>
-		<testcase name="[NONE][CKV_AWS_274] Disallow IAM roles, users, and groups from using the AWS AdministratorAccess policy" classname="/lambda-usuarios.tf.aws_iam_role_policy_attachment.lambda_policy_attachment_usuarios" file="/lambda-usuarios.tf"/>
-		<testcase name="[NONE][CKV_AWS_274] Disallow IAM roles, users, and groups from using the AWS AdministratorAccess policy" classname="/lambda-usuarios.tf.aws_iam_role_policy_attachment.AWSLambdaVPCAccessExecutionRole_usuarios" file="/lambda-usuarios.tf"/>
-		<testcase name="[NONE][CKV_AWS_272] Ensure AWS Lambda function is configured to validate code-signing" classname="/lambda-usuarios.tf.aws_lambda_function.usuarios" file="/lambda-usuarios.tf"/>
-		<testcase name="[NONE][CKV_AWS_117] Ensure that AWS Lambda function is configured inside a VPC" classname="/lambda-usuarios.tf.aws_lambda_function.usuarios" file="/lambda-usuarios.tf"/>
-		<testcase name="[NONE][CKV_AWS_173] Check encryption settings for Lambda environmental variable" classname="/lambda-usuarios.tf.aws_lambda_function.usuarios" file="/lambda-usuarios.tf"/>
-		<testcase name="[NONE][CKV_AWS_363] Ensure Lambda Runtime is not deprecated" classname="/lambda-usuarios.tf.aws_lambda_function.usuarios" file="/lambda-usuarios.tf"/>
-		<testcase name="[NONE][CKV_AWS_115] Ensure that AWS Lambda function is configured for function-level concurrent execution limit" classname="/lambda-usuarios.tf.aws_lambda_function.usuarios" file="/lambda-usuarios.tf"/>
-		<testcase name="[NONE][CKV_AWS_116] Ensure that AWS Lambda function is configured for a Dead Letter Queue(DLQ)" classname="/lambda-usuarios.tf.aws_lambda_function.usuarios" file="/lambda-usuarios.tf"/>
-		<testcase name="[NONE][CKV_AWS_50] X-Ray tracing is enabled for Lambda" classname="/lambda-usuarios.tf.aws_lambda_function.usuarios" file="/lambda-usuarios.tf"/>
-		<testcase name="[NONE][CKV_AWS_45] Ensure no hard-coded secrets exist in lambda environment" classname="/lambda-usuarios.tf.aws_lambda_function.usuarios" file="/lambda-usuarios.tf"/>
-		<testcase name="[NONE][CKV_AWS_227] Ensure KMS key is enabled" classname="/lambda-usuarios.tf.aws_kms_key.lambda_usuarios_key" file="/lambda-usuarios.tf"/>
-		<testcase name="[NONE][CKV_AWS_33] Ensure KMS key policy does not contain wildcard (*) principal" classname="/lambda-usuarios.tf.aws_kms_key.lambda_usuarios_key" file="/lambda-usuarios.tf"/>
-		<testcase name="[NONE][CKV_AWS_7] Ensure rotation for customer created CMKs is enabled" classname="/lambda-usuarios.tf.aws_kms_key.lambda_usuarios_key" file="/lambda-usuarios.tf"/>
-		<testcase name="[NONE][CKV_AWS_364] Ensure that AWS Lambda function permissions delegated to AWS services are limited by SourceArn or SourceAccount" classname="/lambda-usuarios.tf.aws_lambda_permission.allow_s3_usuarios" file="/lambda-usuarios.tf"/>
-		<testcase name="[NONE][CKV_AWS_301] Ensure that AWS Lambda function is not publicly accessible" classname="/lambda-usuarios.tf.aws_lambda_permission.allow_s3_usuarios" file="/lambda-usuarios.tf"/>
-		<testcase name="[NONE][CKV_AWS_274] Disallow IAM roles, users, and groups from using the AWS AdministratorAccess policy" classname="/lambda-viajes.tf.aws_iam_role.lambda_viajes_exec_role" file="/lambda-viajes.tf"/>
-		<testcase name="[NONE][CKV_AWS_61] Ensure AWS IAM policy does not allow assume role permission across all services" classname="/lambda-viajes.tf.aws_iam_role.lambda_viajes_exec_role" file="/lambda-viajes.tf"/>
-		<testcase name="[NONE][CKV_AWS_60] Ensure IAM role allows only specific services or principals to assume it" classname="/lambda-viajes.tf.aws_iam_role.lambda_viajes_exec_role" file="/lambda-viajes.tf"/>
-		<testcase name="[NONE][CKV_AWS_62] Ensure IAM policies that allow full &quot;*-*&quot; administrative privileges are not created" classname="/lambda-viajes.tf.aws_iam_policy.lambda_policy_viajes" file="/lambda-viajes.tf"/>
-		<testcase name="[NONE][CKV_AWS_286] Ensure IAM policies does not allow privilege escalation" classname="/lambda-viajes.tf.aws_iam_policy.lambda_policy_viajes" file="/lambda-viajes.tf"/>
-		<testcase name="[NONE][CKV_AWS_288] Ensure IAM policies does not allow data exfiltration" classname="/lambda-viajes.tf.aws_iam_policy.lambda_policy_viajes" file="/lambda-viajes.tf"/>
-		<testcase name="[NONE][CKV_AWS_290] Ensure IAM policies does not allow write access without constraints" classname="/lambda-viajes.tf.aws_iam_policy.lambda_policy_viajes" file="/lambda-viajes.tf"/>
-		<testcase name="[NONE][CKV_AWS_287] Ensure IAM policies does not allow credentials exposure" classname="/lambda-viajes.tf.aws_iam_policy.lambda_policy_viajes" file="/lambda-viajes.tf"/>
-		<testcase name="[NONE][CKV_AWS_289] Ensure IAM policies does not allow permissions management / resource exposure without constraints" classname="/lambda-viajes.tf.aws_iam_policy.lambda_policy_viajes" file="/lambda-viajes.tf"/>
-		<testcase name="[NONE][CKV_AWS_63] Ensure no IAM policies documents allow &quot;*&quot; as a statement's actions" classname="/lambda-viajes.tf.aws_iam_policy.lambda_policy_viajes" file="/lambda-viajes.tf"/>
-		<testcase name="[NONE][CKV_AWS_355] Ensure no IAM policies documents allow &quot;*&quot; as a statement's resource for restrictable actions" classname="/lambda-viajes.tf.aws_iam_policy.lambda_policy_viajes" file="/lambda-viajes.tf"/>
-		<testcase name="[NONE][CKV_AWS_274] Disallow IAM roles, users, and groups from using the AWS AdministratorAccess policy" classname="/lambda-viajes.tf.aws_iam_role_policy_attachment.lambda_policy_attachment_viajes" file="/lambda-viajes.tf"/>
-		<testcase name="[NONE][CKV_AWS_274] Disallow IAM roles, users, and groups from using the AWS AdministratorAccess policy" classname="/lambda-viajes.tf.aws_iam_role_policy_attachment.AWSLambdaVPCAccessExecutionRole_viajes" file="/lambda-viajes.tf"/>
-		<testcase name="[NONE][CKV_AWS_117] Ensure that AWS Lambda function is configured inside a VPC" classname="/lambda-viajes.tf.aws_lambda_function.viajes" file="/lambda-viajes.tf"/>
-		<testcase name="[NONE][CKV_AWS_45] Ensure no hard-coded secrets exist in lambda environment" classname="/lambda-viajes.tf.aws_lambda_function.viajes" file="/lambda-viajes.tf"/>
-		<testcase name="[NONE][CKV_AWS_364] Ensure that AWS Lambda function permissions delegated to AWS services are limited by SourceArn or SourceAccount" classname="/lambda-viajes.tf.aws_lambda_permission.allow_s3_viajes" file="/lambda-viajes.tf"/>
-		<testcase name="[NONE][CKV_AWS_301] Ensure that AWS Lambda function is not publicly accessible" classname="/lambda-viajes.tf.aws_lambda_permission.allow_s3_viajes" file="/lambda-viajes.tf"/>
-		<testcase name="[NONE][CKV_AWS_175] Ensure WAF has associated rules" classname="/waf-api.tf.aws_wafv2_web_acl.api_waf_acl" file="/waf-api.tf"/>
-		<testcase name="[NONE][CKV_AWS_342] Ensure WAF rule has any actions" classname="/waf-api.tf.aws_wafv2_web_acl.api_waf_acl" file="/waf-api.tf"/>
-		<testcase name="[NONE][CKV2_AWS_46] Ensure AWS CloudFront Distribution with S3 have Origin Access set to enabled" classname="/cloudfront.tf.aws_cloudfront_distribution.cdn" file="/cloudfront.tf"/>
-		<testcase name="[NONE][CKV2_AWS_56] Ensure AWS Managed IAMFullAccess IAM policy is not used." classname="/lambda-taxis.tf.aws_iam_role.lambda_taxis_exec_role" file="/lambda-taxis.tf"/>
-		<testcase name="[NONE][CKV2_AWS_56] Ensure AWS Managed IAMFullAccess IAM policy is not used." classname="/lambda-taxis.tf.aws_iam_role_policy_attachment.AWSLambdaVPCAccessExecutionRole" file="/lambda-taxis.tf"/>
-		<testcase name="[NONE][CKV2_AWS_56] Ensure AWS Managed IAMFullAccess IAM policy is not used." classname="/lambda-usuarios.tf.aws_iam_role.lambda_usuarios_exec_role" file="/lambda-usuarios.tf"/>
-		<testcase name="[NONE][CKV2_AWS_56] Ensure AWS Managed IAMFullAccess IAM policy is not used." classname="/lambda-usuarios.tf.aws_iam_role_policy_attachment.AWSLambdaVPCAccessExecutionRole_usuarios" file="/lambda-usuarios.tf"/>
-		<testcase name="[NONE][CKV2_AWS_56] Ensure AWS Managed IAMFullAccess IAM policy is not used." classname="/lambda-viajes.tf.aws_iam_role.lambda_viajes_exec_role" file="/lambda-viajes.tf"/>
-		<testcase name="[NONE][CKV2_AWS_56] Ensure AWS Managed IAMFullAccess IAM policy is not used." classname="/lambda-viajes.tf.aws_iam_role_policy_attachment.AWSLambdaVPCAccessExecutionRole_viajes" file="/lambda-viajes.tf"/>
-		<testcase name="[NONE][CKV2_AWS_40] Ensure AWS IAM policy does not allow full IAM privileges" classname="/lambda-taxis.tf.aws_iam_policy.lambda_policy" file="/lambda-taxis.tf"/>
-		<testcase name="[NONE][CKV2_AWS_40] Ensure AWS IAM policy does not allow full IAM privileges" classname="/lambda-usuarios.tf.aws_iam_policy.lambda_policy_usuarios" file="/lambda-usuarios.tf"/>
-		<testcase name="[NONE][CKV2_AWS_40] Ensure AWS IAM policy does not allow full IAM privileges" classname="/lambda-viajes.tf.aws_iam_policy.lambda_policy_viajes" file="/lambda-viajes.tf"/>
-		<testcase name="[NONE][CKV2_AWS_72] Ensure AWS CloudFront origin protocol policy enforces HTTPS-only" classname="/cloudfront.tf.aws_cloudfront_distribution.cdn" file="/cloudfront.tf"/>
-		<testcase name="[NONE][CKV_AWS_19] Ensure all data stored in the S3 bucket is securely encrypted at rest" classname="/S3.tf.aws_s3_bucket.bucket" file="/S3.tf"/>
-		<testcase name="[NONE][CKV2_AWS_54] Ensure AWS CloudFront distribution is using secure SSL protocols for HTTPS communication" classname="/cloudfront.tf.aws_cloudfront_distribution.cdn" file="/cloudfront.tf"/>
-		<testcase name="[NONE][CKV2_AWS_75] Ensure no open CORS policy" classname="/lambda-taxis.tf.aws_lambda_function.taxis" file="/lambda-taxis.tf"/>
-		<testcase name="[NONE][CKV2_AWS_75] Ensure no open CORS policy" classname="/lambda-usuarios.tf.aws_lambda_function.usuarios" file="/lambda-usuarios.tf"/>
-		<testcase name="[NONE][CKV2_AWS_75] Ensure no open CORS policy" classname="/lambda-viajes.tf.aws_lambda_function.viajes" file="/lambda-viajes.tf"/>
-		<testcase name="[NONE][CKV_AWS_20] S3 Bucket has an ACL defined which allows public READ access." classname="/S3.tf.aws_s3_bucket.bucket" file="/S3.tf"/>
-		<testcase name="[NONE][CKV_AWS_57] S3 Bucket has an ACL defined which allows public WRITE access." classname="/S3.tf.aws_s3_bucket.bucket" file="/S3.tf"/>
-		<testcase name="[NONE][CKV2_AWS_62] Ensure S3 buckets should have event notifications enabled" classname="/S3.tf.aws_s3_bucket.bucket" file="/S3.tf"/>
-		<testcase name="[NONE][CKV2_AWS_32] Ensure CloudFront distribution has a response headers policy attached" classname="/cloudfront.tf.aws_cloudfront_distribution.cdn" file="/cloudfront.tf"/>
-		<testcase name="[NONE][CKV_AWS_272] Ensure AWS Lambda function is configured to validate code-signing" classname="/lambda-viajes.tf.aws_lambda_function.viajes" file="/lambda-viajes.tf">
-			<failure type="failure" message="Ensure AWS Lambda function is configured to validate code-signing">
-Resource: aws_lambda_function.viajes
-File: /lambda-viajes.tf: 51-76
-Guideline: https://docs.prismacloud.io/en/enterprise-edition/policy-reference/aws-policies/aws-general-policies/bc-aws-272
-
-		51 | resource &quot;aws_lambda_function&quot; &quot;viajes&quot; {
-		52 |   function_name    = &quot;viajes&quot;
-		53 |   handler          = &quot;index.handler&quot;
-		54 |   runtime          = &quot;nodejs16.x&quot;
-		55 |   role             = aws_iam_role.lambda_viajes_exec_role.arn // El arn es el ID para conectar el rol con el recurso
-		56 |   filename         = data.archive_file.lambda_viajes.output_path
-		57 |   source_code_hash = data.archive_file.lambda_viajes.output_base64sha512
-		58 | 
-		59 |   environment {
-		60 |     variables = {
-		61 |       DB_HOST     = &quot;db-taxis-viajes-usuarios.cbmia0266pjz.us-east-2.rds.amazonaws.com&quot; //endpoint
-		62 |       DB_USER     = &quot;IACgrupo7&quot; //master username
-		63 |       DB_PASSWORD = &quot;grupo7_rds&quot; //password
-		64 |       DB_NAME     = &quot;db-taxis-viajes-usuarios&quot;
-		65 |     }
-		66 |   }
-		67 | 
-		68 |   vpc_config {
-		69 |     subnet_ids         = [
-		70 |                           data.aws_subnet.public1-us-east-2a.id, //Definir a que subnet ira la lambda
-		71 |                           data.aws_subnet.public2-us-east-2b.id
-		72 |                           ]
-		73 |     security_group_ids = [data.aws_security_group.lambda_sg.id] //Definir el security group
-		74 |   }
-		75 |   
-		76 | }
-</failure>
-		</testcase>
-		<testcase name="[NONE][CKV_AWS_173] Check encryption settings for Lambda environmental variable" classname="/lambda-viajes.tf.aws_lambda_function.viajes" file="/lambda-viajes.tf">
-			<failure type="failure" message="Check encryption settings for Lambda environmental variable">
-Resource: aws_lambda_function.viajes
-File: /lambda-viajes.tf: 51-76
-Guideline: https://docs.prismacloud.io/en/enterprise-edition/policy-reference/aws-policies/aws-serverless-policies/bc-aws-serverless-5
-
-		51 | resource &quot;aws_lambda_function&quot; &quot;viajes&quot; {
-		52 |   function_name    = &quot;viajes&quot;
-		53 |   handler          = &quot;index.handler&quot;
-		54 |   runtime          = &quot;nodejs16.x&quot;
-		55 |   role             = aws_iam_role.lambda_viajes_exec_role.arn // El arn es el ID para conectar el rol con el recurso
-		56 |   filename         = data.archive_file.lambda_viajes.output_path
-		57 |   source_code_hash = data.archive_file.lambda_viajes.output_base64sha512
-		58 | 
-		59 |   environment {
-		60 |     variables = {
-		61 |       DB_HOST     = &quot;db-taxis-viajes-usuarios.cbmia0266pjz.us-east-2.rds.amazonaws.com&quot; //endpoint
-		62 |       DB_USER     = &quot;IACgrupo7&quot; //master username
-		63 |       DB_PASSWORD = &quot;grupo7_rds&quot; //password
-		64 |       DB_NAME     = &quot;db-taxis-viajes-usuarios&quot;
-		65 |     }
-		66 |   }
-		67 | 
-		68 |   vpc_config {
-		69 |     subnet_ids         = [
-		70 |                           data.aws_subnet.public1-us-east-2a.id, //Definir a que subnet ira la lambda
-		71 |                           data.aws_subnet.public2-us-east-2b.id
-		72 |                           ]
-		73 |     security_group_ids = [data.aws_security_group.lambda_sg.id] //Definir el security group
-		74 |   }
-		75 |   
-		76 | }
-</failure>
-		</testcase>
-		<testcase name="[NONE][CKV_AWS_363] Ensure Lambda Runtime is not deprecated" classname="/lambda-viajes.tf.aws_lambda_function.viajes" file="/lambda-viajes.tf">
-			<failure type="failure" message="Ensure Lambda Runtime is not deprecated">
-Resource: aws_lambda_function.viajes
-File: /lambda-viajes.tf: 51-76
-Guideline: https://docs.prismacloud.io/en/enterprise-edition/policy-reference/aws-policies/aws-general-policies/bc-aws-363
-
-		51 | resource &quot;aws_lambda_function&quot; &quot;viajes&quot; {
-		52 |   function_name    = &quot;viajes&quot;
-		53 |   handler          = &quot;index.handler&quot;
-		54 |   runtime          = &quot;nodejs16.x&quot;
-		55 |   role             = aws_iam_role.lambda_viajes_exec_role.arn // El arn es el ID para conectar el rol con el recurso
-		56 |   filename         = data.archive_file.lambda_viajes.output_path
-		57 |   source_code_hash = data.archive_file.lambda_viajes.output_base64sha512
-		58 | 
-		59 |   environment {
-		60 |     variables = {
-		61 |       DB_HOST     = &quot;db-taxis-viajes-usuarios.cbmia0266pjz.us-east-2.rds.amazonaws.com&quot; //endpoint
-		62 |       DB_USER     = &quot;IACgrupo7&quot; //master username
-		63 |       DB_PASSWORD = &quot;grupo7_rds&quot; //password
-		64 |       DB_NAME     = &quot;db-taxis-viajes-usuarios&quot;
-		65 |     }
-		66 |   }
-		67 | 
-		68 |   vpc_config {
-		69 |     subnet_ids         = [
-		70 |                           data.aws_subnet.public1-us-east-2a.id, //Definir a que subnet ira la lambda
-		71 |                           data.aws_subnet.public2-us-east-2b.id
-		72 |                           ]
-		73 |     security_group_ids = [data.aws_security_group.lambda_sg.id] //Definir el security group
-		74 |   }
-		75 |   
-		76 | }
-</failure>
-		</testcase>
-		<testcase name="[NONE][CKV_AWS_115] Ensure that AWS Lambda function is configured for function-level concurrent execution limit" classname="/lambda-viajes.tf.aws_lambda_function.viajes" file="/lambda-viajes.tf">
-			<failure type="failure" message="Ensure that AWS Lambda function is configured for function-level concurrent execution limit">
-Resource: aws_lambda_function.viajes
-File: /lambda-viajes.tf: 51-76
-Guideline: https://docs.prismacloud.io/en/enterprise-edition/policy-reference/aws-policies/aws-general-policies/ensure-that-aws-lambda-function-is-configured-for-function-level-concurrent-execution-limit
-
-		51 | resource &quot;aws_lambda_function&quot; &quot;viajes&quot; {
-		52 |   function_name    = &quot;viajes&quot;
-		53 |   handler          = &quot;index.handler&quot;
-		54 |   runtime          = &quot;nodejs16.x&quot;
-		55 |   role             = aws_iam_role.lambda_viajes_exec_role.arn // El arn es el ID para conectar el rol con el recurso
-		56 |   filename         = data.archive_file.lambda_viajes.output_path
-		57 |   source_code_hash = data.archive_file.lambda_viajes.output_base64sha512
-		58 | 
-		59 |   environment {
-		60 |     variables = {
-		61 |       DB_HOST     = &quot;db-taxis-viajes-usuarios.cbmia0266pjz.us-east-2.rds.amazonaws.com&quot; //endpoint
-		62 |       DB_USER     = &quot;IACgrupo7&quot; //master username
-		63 |       DB_PASSWORD = &quot;grupo7_rds&quot; //password
-		64 |       DB_NAME     = &quot;db-taxis-viajes-usuarios&quot;
-		65 |     }
-		66 |   }
-		67 | 
-		68 |   vpc_config {
-		69 |     subnet_ids         = [
-		70 |                           data.aws_subnet.public1-us-east-2a.id, //Definir a que subnet ira la lambda
-		71 |                           data.aws_subnet.public2-us-east-2b.id
-		72 |                           ]
-		73 |     security_group_ids = [data.aws_security_group.lambda_sg.id] //Definir el security group
-		74 |   }
-		75 |   
-		76 | }
-</failure>
-		</testcase>
-		<testcase name="[NONE][CKV_AWS_116] Ensure that AWS Lambda function is configured for a Dead Letter Queue(DLQ)" classname="/lambda-viajes.tf.aws_lambda_function.viajes" file="/lambda-viajes.tf">
+		<testcase name="[NONE][CKV_AWS_227] Ensure KMS key is enabled" classname="\S3.tf.aws_kms_key.s3_encryption_key" file="\S3.tf"/>
+		<testcase name="[NONE][CKV_AWS_33] Ensure KMS key policy does not contain wildcard (*) principal" classname="\S3.tf.aws_kms_key.s3_encryption_key" file="\S3.tf"/>
+		<testcase name="[NONE][CKV_AWS_7] Ensure rotation for customer created CMKs is enabled" classname="\S3.tf.aws_kms_key.s3_encryption_key" file="\S3.tf"/>
+		<testcase name="[NONE][CKV_AWS_93] Ensure S3 bucket policy does not lockout all but root user. (Prevent lockouts needing root account fixes)" classname="\S3.tf.aws_s3_bucket.bucket" file="\S3.tf"/>
+		<testcase name="[NONE][CKV_AWS_53] Ensure S3 bucket has block public ACLS enabled" classname="\S3.tf.aws_s3_bucket_public_access_block.bucket_public_access" file="\S3.tf"/>
+		<testcase name="[NONE][CKV_AWS_54] Ensure S3 bucket has block public policy enabled" classname="\S3.tf.aws_s3_bucket_public_access_block.bucket_public_access" file="\S3.tf"/>
+		<testcase name="[NONE][CKV_AWS_55] Ensure S3 bucket has ignore public ACLs enabled" classname="\S3.tf.aws_s3_bucket_public_access_block.bucket_public_access" file="\S3.tf"/>
+		<testcase name="[NONE][CKV_AWS_56] Ensure S3 bucket has 'restrict_public_buckets' enabled" classname="\S3.tf.aws_s3_bucket_public_access_block.bucket_public_access" file="\S3.tf"/>
+		<testcase name="[NONE][CKV_AWS_70] Ensure S3 bucket does not allow an action with any Principal" classname="\S3.tf.aws_s3_bucket_policy.site_policy" file="\S3.tf"/>
+		<testcase name="[NONE][CKV_AWS_93] Ensure S3 bucket policy does not lockout all but root user. (Prevent lockouts needing root account fixes)" classname="\S3.tf.aws_s3_bucket_policy.site_policy" file="\S3.tf"/>
+		<testcase name="[NONE][CKV_AWS_237] Ensure Create before destroy for API Gateway" classname="\apigateway.tf.aws_api_gateway_rest_api.api" file="\apigateway.tf"/>
+		<testcase name="[NONE][CKV_AWS_59] Ensure there is no open access to back-end resources through API" classname="\apigateway.tf.aws_api_gateway_method.post_registro" file="\apigateway.tf"/>
+		<testcase name="[NONE][CKV2_AWS_70] Ensure API gateway method has authorization or API key set" classname="\apigateway.tf.aws_api_gateway_method.post_registro" file="\apigateway.tf"/>
+		<testcase name="[NONE][CKV_AWS_301] Ensure that AWS Lambda function is not publicly accessible" classname="\apigateway.tf.aws_lambda_permission.api_gw_invoke_lambda" file="\apigateway.tf"/>
+		<testcase name="[NONE][CKV_AWS_364] Ensure that AWS Lambda function permissions delegated to AWS services are limited by SourceArn or SourceAccount" classname="\apigateway.tf.aws_lambda_permission.api_gw_invoke_lambda" file="\apigateway.tf"/>
+		<testcase name="[NONE][CKV_AWS_301] Ensure that AWS Lambda function is not publicly accessible" classname="\apigateway.tf.aws_lambda_permission.api_gw_invoke_lambda_taxi" file="\apigateway.tf"/>
+		<testcase name="[NONE][CKV_AWS_364] Ensure that AWS Lambda function permissions delegated to AWS services are limited by SourceArn or SourceAccount" classname="\apigateway.tf.aws_lambda_permission.api_gw_invoke_lambda_taxi" file="\apigateway.tf"/>
+		<testcase name="[NONE][CKV_AWS_301] Ensure that AWS Lambda function is not publicly accessible" classname="\apigateway.tf.aws_lambda_permission.api_gw_invoke_lambda_viaje" file="\apigateway.tf"/>
+		<testcase name="[NONE][CKV_AWS_364] Ensure that AWS Lambda function permissions delegated to AWS services are limited by SourceArn or SourceAccount" classname="\apigateway.tf.aws_lambda_permission.api_gw_invoke_lambda_viaje" file="\apigateway.tf"/>
+		<testcase name="[NONE][CKV_AWS_217] Ensure Create before destroy for API deployments" classname="\apigateway.tf.aws_api_gateway_deployment.api_deploy" file="\apigateway.tf"/>
+		<testcase name="[NONE][CKV_AWS_59] Ensure there is no open access to back-end resources through API" classname="\apigateway.tf.aws_api_gateway_method.options_registro" file="\apigateway.tf"/>
+		<testcase name="[NONE][CKV_AWS_305] Ensure CloudFront distribution has a default root object configured" classname="\cloudfront.tf.aws_cloudfront_distribution.cdn" file="\cloudfront.tf"/>
+		<testcase name="[NONE][CKV_AWS_216] Ensure CloudFront distribution is enabled" classname="\cloudfront.tf.aws_cloudfront_distribution.cdn" file="\cloudfront.tf"/>
+		<testcase name="[NONE][CKV_AWS_34] Ensure CloudFront distribution ViewerProtocolPolicy is set to HTTPS" classname="\cloudfront.tf.aws_cloudfront_distribution.cdn" file="\cloudfront.tf"/>
+		<testcase name="[NONE][CKV_AWS_86] Ensure CloudFront distribution has Access Logging enabled" classname="\cloudfront.tf.aws_cloudfront_distribution.cdn" file="\cloudfront.tf"/>
+		<testcase name="[NONE][CKV_AWS_310] Ensure CloudFront distributions should have origin failover configured" classname="\cloudfront.tf.aws_cloudfront_distribution.cdn" file="\cloudfront.tf"/>
+		<testcase name="[NONE][CKV_AWS_374] Ensure AWS CloudFront web distribution has geo restriction enabled" classname="\cloudfront.tf.aws_cloudfront_distribution.cdn" file="\cloudfront.tf"/>
+		<testcase name="[NONE][CKV_AWS_174] Verify CloudFront Distribution Viewer Certificate is using TLS v1.2" classname="\cloudfront.tf.aws_cloudfront_distribution.cdn" file="\cloudfront.tf"/>
+		<testcase name="[NONE][CKV_AWS_68] CloudFront Distribution should have WAF enabled" classname="\cloudfront.tf.aws_cloudfront_distribution.cdn" file="\cloudfront.tf"/>
+		<testcase name="[NONE][CKV_AWS_259] Ensure CloudFront response header policy enforces Strict Transport Security" classname="\cloudfront.tf.aws_cloudfront_response_headers_policy.cors_policy" file="\cloudfront.tf"/>
+		<testcase name="[NONE][CKV_AWS_274] Disallow IAM roles, users, and groups from using the AWS AdministratorAccess policy" classname="\lambda-taxis.tf.aws_iam_role.lambda_taxis_exec_role" file="\lambda-taxis.tf"/>
+		<testcase name="[NONE][CKV_AWS_61] Ensure AWS IAM policy does not allow assume role permission across all services" classname="\lambda-taxis.tf.aws_iam_role.lambda_taxis_exec_role" file="\lambda-taxis.tf"/>
+		<testcase name="[NONE][CKV_AWS_60] Ensure IAM role allows only specific services or principals to assume it" classname="\lambda-taxis.tf.aws_iam_role.lambda_taxis_exec_role" file="\lambda-taxis.tf"/>
+		<testcase name="[NONE][CKV_AWS_62] Ensure IAM policies that allow full &quot;*-*&quot; administrative privileges are not created" classname="\lambda-taxis.tf.aws_iam_policy.lambda_policy" file="\lambda-taxis.tf"/>
+		<testcase name="[NONE][CKV_AWS_287] Ensure IAM policies does not allow credentials exposure" classname="\lambda-taxis.tf.aws_iam_policy.lambda_policy" file="\lambda-taxis.tf"/>
+		<testcase name="[NONE][CKV_AWS_288] Ensure IAM policies does not allow data exfiltration" classname="\lambda-taxis.tf.aws_iam_policy.lambda_policy" file="\lambda-taxis.tf"/>
+		<testcase name="[NONE][CKV_AWS_289] Ensure IAM policies does not allow permissions management / resource exposure without constraints" classname="\lambda-taxis.tf.aws_iam_policy.lambda_policy" file="\lambda-taxis.tf"/>
+		<testcase name="[NONE][CKV_AWS_286] Ensure IAM policies does not allow privilege escalation" classname="\lambda-taxis.tf.aws_iam_policy.lambda_policy" file="\lambda-taxis.tf"/>
+		<testcase name="[NONE][CKV_AWS_63] Ensure no IAM policies documents allow &quot;*&quot; as a statement's actions" classname="\lambda-taxis.tf.aws_iam_policy.lambda_policy" file="\lambda-taxis.tf"/>
+		<testcase name="[NONE][CKV_AWS_355] Ensure no IAM policies documents allow &quot;*&quot; as a statement's resource for restrictable actions" classname="\lambda-taxis.tf.aws_iam_policy.lambda_policy" file="\lambda-taxis.tf"/>
+		<testcase name="[NONE][CKV_AWS_290] Ensure IAM policies does not allow write access without constraints" classname="\lambda-taxis.tf.aws_iam_policy.lambda_policy" file="\lambda-taxis.tf"/>
+		<testcase name="[NONE][CKV_AWS_274] Disallow IAM roles, users, and groups from using the AWS AdministratorAccess policy" classname="\lambda-taxis.tf.aws_iam_role_policy_attachment.lambda_policy_attachment" file="\lambda-taxis.tf"/>
+		<testcase name="[NONE][CKV_AWS_274] Disallow IAM roles, users, and groups from using the AWS AdministratorAccess policy" classname="\lambda-taxis.tf.aws_iam_role_policy_attachment.AWSLambdaVPCAccessExecutionRole" file="\lambda-taxis.tf"/>
+		<testcase name="[NONE][CKV_AWS_363] Ensure Lambda Runtime is not deprecated" classname="\lambda-taxis.tf.aws_lambda_function.taxis" file="\lambda-taxis.tf"/>
+		<testcase name="[NONE][CKV_AWS_272] Ensure AWS Lambda function is configured to validate code-signing" classname="\lambda-taxis.tf.aws_lambda_function.taxis" file="\lambda-taxis.tf"/>
+		<testcase name="[NONE][CKV_AWS_116] Ensure that AWS Lambda function is configured for a Dead Letter Queue(DLQ)" classname="\lambda-taxis.tf.aws_lambda_function.taxis" file="\lambda-taxis.tf"/>
+		<testcase name="[NONE][CKV_AWS_45] Ensure no hard-coded secrets exist in lambda environment" classname="\lambda-taxis.tf.aws_lambda_function.taxis" file="\lambda-taxis.tf"/>
+		<testcase name="[NONE][CKV_AWS_173] Check encryption settings for Lambda environmental variable" classname="\lambda-taxis.tf.aws_lambda_function.taxis" file="\lambda-taxis.tf"/>
+		<testcase name="[NONE][CKV_AWS_115] Ensure that AWS Lambda function is configured for function-level concurrent execution limit" classname="\lambda-taxis.tf.aws_lambda_function.taxis" file="\lambda-taxis.tf"/>
+		<testcase name="[NONE][CKV_AWS_117] Ensure that AWS Lambda function is configured inside a VPC" classname="\lambda-taxis.tf.aws_lambda_function.taxis" file="\lambda-taxis.tf"/>
+		<testcase name="[NONE][CKV_AWS_50] X-Ray tracing is enabled for Lambda" classname="\lambda-taxis.tf.aws_lambda_function.taxis" file="\lambda-taxis.tf"/>
+		<testcase name="[NONE][CKV_AWS_227] Ensure KMS key is enabled" classname="\lambda-taxis.tf.aws_kms_key.lambda_taxis_key" file="\lambda-taxis.tf"/>
+		<testcase name="[NONE][CKV_AWS_33] Ensure KMS key policy does not contain wildcard (*) principal" classname="\lambda-taxis.tf.aws_kms_key.lambda_taxis_key" file="\lambda-taxis.tf"/>
+		<testcase name="[NONE][CKV_AWS_7] Ensure rotation for customer created CMKs is enabled" classname="\lambda-taxis.tf.aws_kms_key.lambda_taxis_key" file="\lambda-taxis.tf"/>
+		<testcase name="[NONE][CKV_AWS_301] Ensure that AWS Lambda function is not publicly accessible" classname="\lambda-taxis.tf.aws_lambda_permission.allow_s3" file="\lambda-taxis.tf"/>
+		<testcase name="[NONE][CKV_AWS_364] Ensure that AWS Lambda function permissions delegated to AWS services are limited by SourceArn or SourceAccount" classname="\lambda-taxis.tf.aws_lambda_permission.allow_s3" file="\lambda-taxis.tf"/>
+		<testcase name="[NONE][CKV_AWS_274] Disallow IAM roles, users, and groups from using the AWS AdministratorAccess policy" classname="\lambda-usuarios.tf.aws_iam_role.lambda_usuarios_exec_role" file="\lambda-usuarios.tf"/>
+		<testcase name="[NONE][CKV_AWS_61] Ensure AWS IAM policy does not allow assume role permission across all services" classname="\lambda-usuarios.tf.aws_iam_role.lambda_usuarios_exec_role" file="\lambda-usuarios.tf"/>
+		<testcase name="[NONE][CKV_AWS_60] Ensure IAM role allows only specific services or principals to assume it" classname="\lambda-usuarios.tf.aws_iam_role.lambda_usuarios_exec_role" file="\lambda-usuarios.tf"/>
+		<testcase name="[NONE][CKV_AWS_62] Ensure IAM policies that allow full &quot;*-*&quot; administrative privileges are not created" classname="\lambda-usuarios.tf.aws_iam_policy.lambda_policy_usuarios" file="\lambda-usuarios.tf"/>
+		<testcase name="[NONE][CKV_AWS_287] Ensure IAM policies does not allow credentials exposure" classname="\lambda-usuarios.tf.aws_iam_policy.lambda_policy_usuarios" file="\lambda-usuarios.tf"/>
+		<testcase name="[NONE][CKV_AWS_288] Ensure IAM policies does not allow data exfiltration" classname="\lambda-usuarios.tf.aws_iam_policy.lambda_policy_usuarios" file="\lambda-usuarios.tf"/>
+		<testcase name="[NONE][CKV_AWS_289] Ensure IAM policies does not allow permissions management / resource exposure without constraints" classname="\lambda-usuarios.tf.aws_iam_policy.lambda_policy_usuarios" file="\lambda-usuarios.tf"/>
+		<testcase name="[NONE][CKV_AWS_286] Ensure IAM policies does not allow privilege escalation" classname="\lambda-usuarios.tf.aws_iam_policy.lambda_policy_usuarios" file="\lambda-usuarios.tf"/>
+		<testcase name="[NONE][CKV_AWS_63] Ensure no IAM policies documents allow &quot;*&quot; as a statement's actions" classname="\lambda-usuarios.tf.aws_iam_policy.lambda_policy_usuarios" file="\lambda-usuarios.tf"/>
+		<testcase name="[NONE][CKV_AWS_355] Ensure no IAM policies documents allow &quot;*&quot; as a statement's resource for restrictable actions" classname="\lambda-usuarios.tf.aws_iam_policy.lambda_policy_usuarios" file="\lambda-usuarios.tf"/>
+		<testcase name="[NONE][CKV_AWS_290] Ensure IAM policies does not allow write access without constraints" classname="\lambda-usuarios.tf.aws_iam_policy.lambda_policy_usuarios" file="\lambda-usuarios.tf"/>
+		<testcase name="[NONE][CKV_AWS_274] Disallow IAM roles, users, and groups from using the AWS AdministratorAccess policy" classname="\lambda-usuarios.tf.aws_iam_role_policy_attachment.lambda_policy_attachment_usuarios" file="\lambda-usuarios.tf"/>
+		<testcase name="[NONE][CKV_AWS_274] Disallow IAM roles, users, and groups from using the AWS AdministratorAccess policy" classname="\lambda-usuarios.tf.aws_iam_role_policy_attachment.AWSLambdaVPCAccessExecutionRole_usuarios" file="\lambda-usuarios.tf"/>
+		<testcase name="[NONE][CKV_AWS_363] Ensure Lambda Runtime is not deprecated" classname="\lambda-usuarios.tf.aws_lambda_function.usuarios" file="\lambda-usuarios.tf"/>
+		<testcase name="[NONE][CKV_AWS_272] Ensure AWS Lambda function is configured to validate code-signing" classname="\lambda-usuarios.tf.aws_lambda_function.usuarios" file="\lambda-usuarios.tf"/>
+		<testcase name="[NONE][CKV_AWS_116] Ensure that AWS Lambda function is configured for a Dead Letter Queue(DLQ)" classname="\lambda-usuarios.tf.aws_lambda_function.usuarios" file="\lambda-usuarios.tf"/>
+		<testcase name="[NONE][CKV_AWS_45] Ensure no hard-coded secrets exist in lambda environment" classname="\lambda-usuarios.tf.aws_lambda_function.usuarios" file="\lambda-usuarios.tf"/>
+		<testcase name="[NONE][CKV_AWS_173] Check encryption settings for Lambda environmental variable" classname="\lambda-usuarios.tf.aws_lambda_function.usuarios" file="\lambda-usuarios.tf"/>
+		<testcase name="[NONE][CKV_AWS_115] Ensure that AWS Lambda function is configured for function-level concurrent execution limit" classname="\lambda-usuarios.tf.aws_lambda_function.usuarios" file="\lambda-usuarios.tf"/>
+		<testcase name="[NONE][CKV_AWS_117] Ensure that AWS Lambda function is configured inside a VPC" classname="\lambda-usuarios.tf.aws_lambda_function.usuarios" file="\lambda-usuarios.tf"/>
+		<testcase name="[NONE][CKV_AWS_50] X-Ray tracing is enabled for Lambda" classname="\lambda-usuarios.tf.aws_lambda_function.usuarios" file="\lambda-usuarios.tf"/>
+		<testcase name="[NONE][CKV_AWS_227] Ensure KMS key is enabled" classname="\lambda-usuarios.tf.aws_kms_key.lambda_usuarios_key" file="\lambda-usuarios.tf"/>
+		<testcase name="[NONE][CKV_AWS_33] Ensure KMS key policy does not contain wildcard (*) principal" classname="\lambda-usuarios.tf.aws_kms_key.lambda_usuarios_key" file="\lambda-usuarios.tf"/>
+		<testcase name="[NONE][CKV_AWS_7] Ensure rotation for customer created CMKs is enabled" classname="\lambda-usuarios.tf.aws_kms_key.lambda_usuarios_key" file="\lambda-usuarios.tf"/>
+		<testcase name="[NONE][CKV_AWS_301] Ensure that AWS Lambda function is not publicly accessible" classname="\lambda-usuarios.tf.aws_lambda_permission.allow_s3_usuarios" file="\lambda-usuarios.tf"/>
+		<testcase name="[NONE][CKV_AWS_364] Ensure that AWS Lambda function permissions delegated to AWS services are limited by SourceArn or SourceAccount" classname="\lambda-usuarios.tf.aws_lambda_permission.allow_s3_usuarios" file="\lambda-usuarios.tf"/>
+		<testcase name="[NONE][CKV_AWS_274] Disallow IAM roles, users, and groups from using the AWS AdministratorAccess policy" classname="\lambda-viajes.tf.aws_iam_role.lambda_viajes_exec_role" file="\lambda-viajes.tf"/>
+		<testcase name="[NONE][CKV_AWS_61] Ensure AWS IAM policy does not allow assume role permission across all services" classname="\lambda-viajes.tf.aws_iam_role.lambda_viajes_exec_role" file="\lambda-viajes.tf"/>
+		<testcase name="[NONE][CKV_AWS_60] Ensure IAM role allows only specific services or principals to assume it" classname="\lambda-viajes.tf.aws_iam_role.lambda_viajes_exec_role" file="\lambda-viajes.tf"/>
+		<testcase name="[NONE][CKV_AWS_62] Ensure IAM policies that allow full &quot;*-*&quot; administrative privileges are not created" classname="\lambda-viajes.tf.aws_iam_role_policy.lambda_xray_policy" file="\lambda-viajes.tf"/>
+		<testcase name="[NONE][CKV_AWS_287] Ensure IAM policies does not allow credentials exposure" classname="\lambda-viajes.tf.aws_iam_role_policy.lambda_xray_policy" file="\lambda-viajes.tf"/>
+		<testcase name="[NONE][CKV_AWS_288] Ensure IAM policies does not allow data exfiltration" classname="\lambda-viajes.tf.aws_iam_role_policy.lambda_xray_policy" file="\lambda-viajes.tf"/>
+		<testcase name="[NONE][CKV_AWS_289] Ensure IAM policies does not allow permissions management / resource exposure without constraints" classname="\lambda-viajes.tf.aws_iam_role_policy.lambda_xray_policy" file="\lambda-viajes.tf"/>
+		<testcase name="[NONE][CKV_AWS_286] Ensure IAM policies does not allow privilege escalation" classname="\lambda-viajes.tf.aws_iam_role_policy.lambda_xray_policy" file="\lambda-viajes.tf"/>
+		<testcase name="[NONE][CKV_AWS_63] Ensure no IAM policies documents allow &quot;*&quot; as a statement's actions" classname="\lambda-viajes.tf.aws_iam_role_policy.lambda_xray_policy" file="\lambda-viajes.tf"/>
+		<testcase name="[NONE][CKV_AWS_355] Ensure no IAM policies documents allow &quot;*&quot; as a statement's resource for restrictable actions" classname="\lambda-viajes.tf.aws_iam_role_policy.lambda_xray_policy" file="\lambda-viajes.tf"/>
+		<testcase name="[NONE][CKV_AWS_290] Ensure IAM policies does not allow write access without constraints" classname="\lambda-viajes.tf.aws_iam_role_policy.lambda_xray_policy" file="\lambda-viajes.tf"/>
+		<testcase name="[NONE][CKV_AWS_62] Ensure IAM policies that allow full &quot;*-*&quot; administrative privileges are not created" classname="\lambda-viajes.tf.aws_iam_policy.lambda_policy_viajes" file="\lambda-viajes.tf"/>
+		<testcase name="[NONE][CKV_AWS_287] Ensure IAM policies does not allow credentials exposure" classname="\lambda-viajes.tf.aws_iam_policy.lambda_policy_viajes" file="\lambda-viajes.tf"/>
+		<testcase name="[NONE][CKV_AWS_288] Ensure IAM policies does not allow data exfiltration" classname="\lambda-viajes.tf.aws_iam_policy.lambda_policy_viajes" file="\lambda-viajes.tf"/>
+		<testcase name="[NONE][CKV_AWS_289] Ensure IAM policies does not allow permissions management / resource exposure without constraints" classname="\lambda-viajes.tf.aws_iam_policy.lambda_policy_viajes" file="\lambda-viajes.tf"/>
+		<testcase name="[NONE][CKV_AWS_286] Ensure IAM policies does not allow privilege escalation" classname="\lambda-viajes.tf.aws_iam_policy.lambda_policy_viajes" file="\lambda-viajes.tf"/>
+		<testcase name="[NONE][CKV_AWS_63] Ensure no IAM policies documents allow &quot;*&quot; as a statement's actions" classname="\lambda-viajes.tf.aws_iam_policy.lambda_policy_viajes" file="\lambda-viajes.tf"/>
+		<testcase name="[NONE][CKV_AWS_355] Ensure no IAM policies documents allow &quot;*&quot; as a statement's resource for restrictable actions" classname="\lambda-viajes.tf.aws_iam_policy.lambda_policy_viajes" file="\lambda-viajes.tf"/>
+		<testcase name="[NONE][CKV_AWS_290] Ensure IAM policies does not allow write access without constraints" classname="\lambda-viajes.tf.aws_iam_policy.lambda_policy_viajes" file="\lambda-viajes.tf"/>
+		<testcase name="[NONE][CKV_AWS_274] Disallow IAM roles, users, and groups from using the AWS AdministratorAccess policy" classname="\lambda-viajes.tf.aws_iam_role_policy_attachment.lambda_policy_attachment_viajes" file="\lambda-viajes.tf"/>
+		<testcase name="[NONE][CKV_AWS_274] Disallow IAM roles, users, and groups from using the AWS AdministratorAccess policy" classname="\lambda-viajes.tf.aws_iam_role_policy_attachment.AWSLambdaVPCAccessExecutionRole_viajes" file="\lambda-viajes.tf"/>
+		<testcase name="[NONE][CKV_AWS_363] Ensure Lambda Runtime is not deprecated" classname="\lambda-viajes.tf.aws_lambda_function.viajes" file="\lambda-viajes.tf"/>
+		<testcase name="[NONE][CKV_AWS_272] Ensure AWS Lambda function is configured to validate code-signing" classname="\lambda-viajes.tf.aws_lambda_function.viajes" file="\lambda-viajes.tf"/>
+		<testcase name="[NONE][CKV_AWS_45] Ensure no hard-coded secrets exist in lambda environment" classname="\lambda-viajes.tf.aws_lambda_function.viajes" file="\lambda-viajes.tf"/>
+		<testcase name="[NONE][CKV_AWS_173] Check encryption settings for Lambda environmental variable" classname="\lambda-viajes.tf.aws_lambda_function.viajes" file="\lambda-viajes.tf"/>
+		<testcase name="[NONE][CKV_AWS_115] Ensure that AWS Lambda function is configured for function-level concurrent execution limit" classname="\lambda-viajes.tf.aws_lambda_function.viajes" file="\lambda-viajes.tf"/>
+		<testcase name="[NONE][CKV_AWS_117] Ensure that AWS Lambda function is configured inside a VPC" classname="\lambda-viajes.tf.aws_lambda_function.viajes" file="\lambda-viajes.tf"/>
+		<testcase name="[NONE][CKV_AWS_50] X-Ray tracing is enabled for Lambda" classname="\lambda-viajes.tf.aws_lambda_function.viajes" file="\lambda-viajes.tf"/>
+		<testcase name="[NONE][CKV_AWS_227] Ensure KMS key is enabled" classname="\lambda-viajes.tf.aws_kms_key.lambda_env_key" file="\lambda-viajes.tf"/>
+		<testcase name="[NONE][CKV_AWS_33] Ensure KMS key policy does not contain wildcard (*) principal" classname="\lambda-viajes.tf.aws_kms_key.lambda_env_key" file="\lambda-viajes.tf"/>
+		<testcase name="[NONE][CKV_AWS_7] Ensure rotation for customer created CMKs is enabled" classname="\lambda-viajes.tf.aws_kms_key.lambda_env_key" file="\lambda-viajes.tf"/>
+		<testcase name="[NONE][CKV_AWS_301] Ensure that AWS Lambda function is not publicly accessible" classname="\lambda-viajes.tf.aws_lambda_permission.allow_s3_viajes" file="\lambda-viajes.tf"/>
+		<testcase name="[NONE][CKV_AWS_364] Ensure that AWS Lambda function permissions delegated to AWS services are limited by SourceArn or SourceAccount" classname="\lambda-viajes.tf.aws_lambda_permission.allow_s3_viajes" file="\lambda-viajes.tf"/>
+		<testcase name="[NONE][CKV_AWS_41] Ensure no hard coded AWS access key and secret key exists in provider" classname="\main.tf.aws.default" file="\main.tf"/>
+		<testcase name="[NONE][CKV_AWS_192] Ensure WAF prevents message lookup in Log4j2. See CVE-2021-44228 aka log4jshell" classname="\waf-api.tf.aws_wafv2_web_acl.api_waf_acl" file="\waf-api.tf"/>
+		<testcase name="[NONE][CKV_AWS_175] Ensure WAF has associated rules" classname="\waf-api.tf.aws_wafv2_web_acl.api_waf_acl" file="\waf-api.tf"/>
+		<testcase name="[NONE][CKV_AWS_342] Ensure WAF rule has any actions" classname="\waf-api.tf.aws_wafv2_web_acl.api_waf_acl" file="\waf-api.tf"/>
+		<testcase name="[NONE][CKV2_AWS_53] Ensure AWS API gateway request is validated" classname="\apigateway.tf.aws_api_gateway_method.post_registro" file="\apigateway.tf"/>
+		<testcase name="[NONE][CKV2_AWS_53] Ensure AWS API gateway request is validated" classname="\apigateway.tf.aws_api_gateway_method.options_registro" file="\apigateway.tf"/>
+		<testcase name="[NONE][CKV2_AWS_72] Ensure AWS CloudFront origin protocol policy enforces HTTPS-only" classname="\cloudfront.tf.aws_cloudfront_distribution.cdn" file="\cloudfront.tf"/>
+		<testcase name="[NONE][CKV2_AWS_42] Ensure AWS CloudFront distribution uses custom SSL certificate" classname="\cloudfront.tf.aws_cloudfront_distribution.cdn" file="\cloudfront.tf"/>
+		<testcase name="[NONE][CKV2_AWS_32] Ensure CloudFront distribution has a response headers policy attached" classname="\cloudfront.tf.aws_cloudfront_distribution.cdn" file="\cloudfront.tf"/>
+		<testcase name="[NONE][CKV2_AWS_54] Ensure AWS CloudFront distribution is using secure SSL protocols for HTTPS communication" classname="\cloudfront.tf.aws_cloudfront_distribution.cdn" file="\cloudfront.tf"/>
+		<testcase name="[NONE][CKV2_AWS_46] Ensure AWS CloudFront Distribution with S3 have Origin Access set to enabled" classname="\cloudfront.tf.aws_cloudfront_distribution.cdn" file="\cloudfront.tf"/>
+		<testcase name="[NONE][CKV2_AWS_56] Ensure AWS Managed IAMFullAccess IAM policy is not used." classname="\lambda-taxis.tf.aws_iam_role.lambda_taxis_exec_role" file="\lambda-taxis.tf"/>
+		<testcase name="[NONE][CKV2_AWS_56] Ensure AWS Managed IAMFullAccess IAM policy is not used." classname="\lambda-taxis.tf.aws_iam_role_policy_attachment.AWSLambdaVPCAccessExecutionRole" file="\lambda-taxis.tf"/>
+		<testcase name="[NONE][CKV2_AWS_56] Ensure AWS Managed IAMFullAccess IAM policy is not used." classname="\lambda-usuarios.tf.aws_iam_role.lambda_usuarios_exec_role" file="\lambda-usuarios.tf"/>
+		<testcase name="[NONE][CKV2_AWS_56] Ensure AWS Managed IAMFullAccess IAM policy is not used." classname="\lambda-usuarios.tf.aws_iam_role_policy_attachment.AWSLambdaVPCAccessExecutionRole_usuarios" file="\lambda-usuarios.tf"/>
+		<testcase name="[NONE][CKV2_AWS_56] Ensure AWS Managed IAMFullAccess IAM policy is not used." classname="\lambda-viajes.tf.aws_iam_role.lambda_viajes_exec_role" file="\lambda-viajes.tf"/>
+		<testcase name="[NONE][CKV2_AWS_56] Ensure AWS Managed IAMFullAccess IAM policy is not used." classname="\lambda-viajes.tf.aws_iam_role_policy_attachment.AWSLambdaVPCAccessExecutionRole_viajes" file="\lambda-viajes.tf"/>
+		<testcase name="[NONE][CKV2_AWS_75] Ensure no open CORS policy" classname="\lambda-taxis.tf.aws_lambda_function.taxis" file="\lambda-taxis.tf"/>
+		<testcase name="[NONE][CKV2_AWS_75] Ensure no open CORS policy" classname="\lambda-usuarios.tf.aws_lambda_function.usuarios" file="\lambda-usuarios.tf"/>
+		<testcase name="[NONE][CKV2_AWS_75] Ensure no open CORS policy" classname="\lambda-viajes.tf.aws_lambda_function.viajes" file="\lambda-viajes.tf"/>
+		<testcase name="[NONE][CKV2_AWS_62] Ensure S3 buckets should have event notifications enabled" classname="\S3.tf.aws_s3_bucket.bucket" file="\S3.tf"/>
+		<testcase name="[NONE][CKV2_AWS_40] Ensure AWS IAM policy does not allow full IAM privileges" classname="\lambda-taxis.tf.aws_iam_policy.lambda_policy" file="\lambda-taxis.tf"/>
+		<testcase name="[NONE][CKV2_AWS_40] Ensure AWS IAM policy does not allow full IAM privileges" classname="\lambda-usuarios.tf.aws_iam_policy.lambda_policy_usuarios" file="\lambda-usuarios.tf"/>
+		<testcase name="[NONE][CKV2_AWS_40] Ensure AWS IAM policy does not allow full IAM privileges" classname="\lambda-viajes.tf.aws_iam_role_policy.lambda_xray_policy" file="\lambda-viajes.tf"/>
+		<testcase name="[NONE][CKV2_AWS_40] Ensure AWS IAM policy does not allow full IAM privileges" classname="\lambda-viajes.tf.aws_iam_policy.lambda_policy_viajes" file="\lambda-viajes.tf"/>
+		<testcase name="[NONE][CKV2_AWS_61] Ensure that an S3 bucket has a lifecycle configuration" classname="\S3.tf.aws_s3_bucket.bucket" file="\S3.tf"/>
+		<testcase name="[NONE][CKV2_AWS_6] Ensure that S3 bucket has a Public Access block" classname="\S3.tf.aws_s3_bucket.bucket" file="\S3.tf"/>
+		<testcase name="[NONE][CKV_AWS_20] S3 Bucket has an ACL defined which allows public READ access." classname="\S3.tf.aws_s3_bucket.bucket" file="\S3.tf"/>
+		<testcase name="[NONE][CKV_AWS_57] S3 Bucket has an ACL defined which allows public WRITE access." classname="\S3.tf.aws_s3_bucket.bucket" file="\S3.tf"/>
+		<testcase name="[NONE][CKV_AWS_21] Ensure all data stored in the S3 bucket have versioning enabled" classname="\S3.tf.aws_s3_bucket.bucket" file="\S3.tf"/>
+		<testcase name="[NONE][CKV_AWS_19] Ensure all data stored in the S3 bucket is securely encrypted at rest" classname="\S3.tf.aws_s3_bucket.bucket" file="\S3.tf"/>
+		<testcase name="[NONE][CKV_AWS_145] Ensure that S3 buckets are encrypted with KMS by default" classname="\S3.tf.aws_s3_bucket.bucket" file="\S3.tf"/>
+		<testcase name="[NONE][CKV2_AWS_64] Ensure KMS key Policy is defined" classname="\S3.tf.aws_kms_key.s3_encryption_key" file="\S3.tf"/>
+		<testcase name="[NONE][CKV2_AWS_64] Ensure KMS key Policy is defined" classname="\lambda-taxis.tf.aws_kms_key.lambda_taxis_key" file="\lambda-taxis.tf"/>
+		<testcase name="[NONE][CKV2_AWS_64] Ensure KMS key Policy is defined" classname="\lambda-usuarios.tf.aws_kms_key.lambda_usuarios_key" file="\lambda-usuarios.tf"/>
+		<testcase name="[NONE][CKV2_AWS_64] Ensure KMS key Policy is defined" classname="\lambda-viajes.tf.aws_kms_key.lambda_env_key" file="\lambda-viajes.tf"/>
+		<testcase name="[NONE][CKV_AWS_116] Ensure that AWS Lambda function is configured for a Dead Letter Queue(DLQ)" classname="\lambda-viajes.tf.aws_lambda_function.viajes" file="\lambda-viajes.tf">
 			<failure type="failure" message="Ensure that AWS Lambda function is configured for a Dead Letter Queue(DLQ)">
 Resource: aws_lambda_function.viajes
-File: /lambda-viajes.tf: 51-76
+File: \lambda-viajes.tf: 70-103
 Guideline: https://docs.prismacloud.io/en/enterprise-edition/policy-reference/aws-policies/aws-general-policies/ensure-that-aws-lambda-function-is-configured-for-a-dead-letter-queue-dlq
 
-		51 | resource &quot;aws_lambda_function&quot; &quot;viajes&quot; {
-		52 |   function_name    = &quot;viajes&quot;
-		53 |   handler          = &quot;index.handler&quot;
-		54 |   runtime          = &quot;nodejs16.x&quot;
-		55 |   role             = aws_iam_role.lambda_viajes_exec_role.arn // El arn es el ID para conectar el rol con el recurso
-		56 |   filename         = data.archive_file.lambda_viajes.output_path
-		57 |   source_code_hash = data.archive_file.lambda_viajes.output_base64sha512
-		58 | 
-		59 |   environment {
-		60 |     variables = {
-		61 |       DB_HOST     = &quot;db-taxis-viajes-usuarios.cbmia0266pjz.us-east-2.rds.amazonaws.com&quot; //endpoint
-		62 |       DB_USER     = &quot;IACgrupo7&quot; //master username
-		63 |       DB_PASSWORD = &quot;grupo7_rds&quot; //password
-		64 |       DB_NAME     = &quot;db-taxis-viajes-usuarios&quot;
-		65 |     }
-		66 |   }
-		67 | 
-		68 |   vpc_config {
-		69 |     subnet_ids         = [
-		70 |                           data.aws_subnet.public1-us-east-2a.id, //Definir a que subnet ira la lambda
-		71 |                           data.aws_subnet.public2-us-east-2b.id
-		72 |                           ]
-		73 |     security_group_ids = [data.aws_security_group.lambda_sg.id] //Definir el security group
-		74 |   }
-		75 |   
-		76 | }
+		70  | resource "aws_lambda_function" "viajes" {
+		71  |   function_name    = "viajes"
+		72  |   handler          = "index.handler"
+		73  |   runtime          = "nodejs20.x"
+		74  |   role             = aws_iam_role.lambda_viajes_exec_role.arn // El arn es el ID para conectar el rol con el recurso
+		75  |   filename         = data.archive_file.lambda_viajes.output_path
+		76  |   source_code_hash = data.archive_file.lambda_viajes.output_base64sha512
+		77  | 
+		78  |   environment {
+		79  |     variables = {
+		80  |       DB_HOST     = "db-taxis-viajes-usuarios.cbmia0266pjz.us-east-2.rds.amazonaws.com" //endpoint
+		81  |       DB_USER     = "IACgrupo7" //master username
+		82  |       DB_PASSWORD = "grupo7_rds" //password
+		83  |       DB_NAME     = "db-taxis-viajes-usuarios"
+		84  |     }
+		85  |   }
+		86  | 
+		87  |   kms_key_arn = aws_kms_key.lambda_env_key.arn
+		88  |   reserved_concurrent_executions = 50 
+		89  |   tracing_config {
+		90  |     mode = "Active"
+		91  |   }
+		92  | 
+		93  |   vpc_config {
+		94  |     subnet_ids         = [
+		95  |                           data.aws_subnet.public1-us-east-2a.id, //Definir a que subnet ira la lambda
+		96  |                           data.aws_subnet.public2-us-east-2b.id
+		97  |                           ]
+		98  |     security_group_ids = [data.aws_security_group.lambda_sg.id] //Definir el security group
+		99  |   }
+		100 |   
+		101 |   code_signing_config_arn = aws_lambda_code_signing_config.example.arn
+		102 |   
+		103 | }
 </failure>
 		</testcase>
-		<testcase name="[NONE][CKV_AWS_50] X-Ray tracing is enabled for Lambda" classname="/lambda-viajes.tf.aws_lambda_function.viajes" file="/lambda-viajes.tf">
-			<failure type="failure" message="X-Ray tracing is enabled for Lambda">
-Resource: aws_lambda_function.viajes
-File: /lambda-viajes.tf: 51-76
-Guideline: https://docs.prismacloud.io/en/enterprise-edition/policy-reference/aws-policies/aws-serverless-policies/bc-aws-serverless-4
-
-		51 | resource &quot;aws_lambda_function&quot; &quot;viajes&quot; {
-		52 |   function_name    = &quot;viajes&quot;
-		53 |   handler          = &quot;index.handler&quot;
-		54 |   runtime          = &quot;nodejs16.x&quot;
-		55 |   role             = aws_iam_role.lambda_viajes_exec_role.arn // El arn es el ID para conectar el rol con el recurso
-		56 |   filename         = data.archive_file.lambda_viajes.output_path
-		57 |   source_code_hash = data.archive_file.lambda_viajes.output_base64sha512
-		58 | 
-		59 |   environment {
-		60 |     variables = {
-		61 |       DB_HOST     = &quot;db-taxis-viajes-usuarios.cbmia0266pjz.us-east-2.rds.amazonaws.com&quot; //endpoint
-		62 |       DB_USER     = &quot;IACgrupo7&quot; //master username
-		63 |       DB_PASSWORD = &quot;grupo7_rds&quot; //password
-		64 |       DB_NAME     = &quot;db-taxis-viajes-usuarios&quot;
-		65 |     }
-		66 |   }
-		67 | 
-		68 |   vpc_config {
-		69 |     subnet_ids         = [
-		70 |                           data.aws_subnet.public1-us-east-2a.id, //Definir a que subnet ira la lambda
-		71 |                           data.aws_subnet.public2-us-east-2b.id
-		72 |                           ]
-		73 |     security_group_ids = [data.aws_security_group.lambda_sg.id] //Definir el security group
-		74 |   }
-		75 |   
-		76 | }
-</failure>
-		</testcase>
-		<testcase name="[NONE][CKV_AWS_41] Ensure no hard coded AWS access key and secret key exists in provider" classname="/main.tf.aws.default" file="/main.tf">
-			<failure type="failure" message="Ensure no hard coded AWS access key and secret key exists in provider">
-Resource: aws.default
-File: /main.tf: 10-14
-Guideline: https://docs.prismacloud.io/en/enterprise-edition/policy-reference/aws-policies/secrets-policies/bc-aws-secrets-5
-
-		10 | provider &quot;aws&quot; { //Keys del ROOT
-		11 |     region = &quot;us-east-2&quot;
-		12 |     access_key = &quot;AKIA5**********&quot;
-		13 |     secret_key = &quot;dVC+47**********&quot;
-		14 | }
-</failure>
-		</testcase>
-		<testcase name="[NONE][CKV_AWS_192] Ensure WAF prevents message lookup in Log4j2. See CVE-2021-44228 aka log4jshell" classname="/waf-api.tf.aws_wafv2_web_acl.api_waf_acl" file="/waf-api.tf">
-			<failure type="failure" message="Ensure WAF prevents message lookup in Log4j2. See CVE-2021-44228 aka log4jshell">
-Resource: aws_wafv2_web_acl.api_waf_acl
-File: /waf-api.tf: 1-36
-Guideline: https://docs.prismacloud.io/en/enterprise-edition/policy-reference/aws-policies/aws-networking-policies/ensure-waf-prevents-message-lookup-in-log4j2
-
-		1  | resource &quot;aws_wafv2_web_acl&quot; &quot;api_waf_acl&quot; {
-		2  |   name        = &quot;api-waf-acl&quot;
-		3  |   description = &quot;WAF para proteger el API Gateway&quot;
-		4  |   scope       = &quot;REGIONAL&quot; # Para API Gateway o ALB, siempre &quot;REGIONAL&quot;
-		5  |   default_action {
-		6  |     allow {}
-		7  |   }
-		8  | 
-		9  |   visibility_config {
-		10 |     cloudwatch_metrics_enabled = true
-		11 |     metric_name                = &quot;apiWaf&quot;
-		12 |     sampled_requests_enabled   = true
-		13 |   }
-		14 | 
-		15 |   rule {
-		16 |     name     = &quot;limit-requests&quot;
-		17 |     priority = 1
-		18 | 
-		19 |     action {
-		20 |       block {}
-		21 |     }
-		22 | 
-		23 |     statement {
-		24 |       rate_based_statement {
-		25 |         limit              = 1000
-		26 |         aggregate_key_type = &quot;IP&quot;
-		27 |       }
-		28 |     }
-		29 | 
-		30 |     visibility_config {
-		31 |       cloudwatch_metrics_enabled = true
-		32 |       metric_name                = &quot;limitRequests&quot;
-		33 |       sampled_requests_enabled   = true
-		34 |     }
-		35 |   }
-		36 | }
-</failure>
-		</testcase>
-		<testcase name="[NONE][CKV2_AWS_6] Ensure that S3 bucket has a Public Access block" classname="/S3.tf.aws_s3_bucket.bucket" file="/S3.tf">
-			<failure type="failure" message="Ensure that S3 bucket has a Public Access block">
-Resource: aws_s3_bucket.bucket
-File: /S3.tf: 1-3
-Guideline: https://docs.prismacloud.io/en/enterprise-edition/policy-reference/aws-policies/aws-networking-policies/s3-bucket-should-have-public-access-blocks-defaults-to-false-if-the-public-access-block-is-not-attached
-
-		1 | resource &quot;aws_s3_bucket&quot; &quot;bucket&quot; {
-		2 |   bucket = &quot;taxis-bucket&quot;
-		3 | }
-</failure>
-		</testcase>
-		<testcase name="[NONE][CKV2_AWS_47] Ensure AWS CloudFront attached WAFv2 WebACL is configured with AMR for Log4j Vulnerability" classname="/cloudfront.tf.aws_cloudfront_distribution.cdn" file="/cloudfront.tf">
+		<testcase name="[NONE][CKV2_AWS_47] Ensure AWS CloudFront attached WAFv2 WebACL is configured with AMR for Log4j Vulnerability" classname="\cloudfront.tf.aws_cloudfront_distribution.cdn" file="\cloudfront.tf">
 			<failure type="failure" message="Ensure AWS CloudFront attached WAFv2 WebACL is configured with AMR for Log4j Vulnerability">
 Resource: aws_cloudfront_distribution.cdn
-File: /cloudfront.tf: 10-72
+File: \cloudfront.tf: 10-73
 Guideline: https://docs.prismacloud.io/en/enterprise-edition/policy-reference/aws-policies/aws-general-policies/bc-aws-general-47
 
 		Code lines for this resource are too many. Please use IDE of your choice to review the file.</failure>
 		</testcase>
-		<testcase name="[NONE][CKV2_AWS_42] Ensure AWS CloudFront distribution uses custom SSL certificate" classname="/cloudfront.tf.aws_cloudfront_distribution.cdn" file="/cloudfront.tf">
-			<failure type="failure" message="Ensure AWS CloudFront distribution uses custom SSL certificate">
-Resource: aws_cloudfront_distribution.cdn
-File: /cloudfront.tf: 10-72
-Guideline: https://docs.prismacloud.io/en/enterprise-edition/policy-reference/aws-policies/aws-networking-policies/ensure-aws-cloudfront-distribution-uses-custom-ssl-certificate
+		<testcase name="[NONE][CKV_AWS_18] Ensure the S3 bucket has access logging enabled" classname="\S3.tf.aws_s3_bucket.bucket" file="\S3.tf">
+			<failure type="failure" message="Ensure the S3 bucket has access logging enabled">
+Resource: aws_s3_bucket.bucket
+File: \S3.tf: 25-42
+Guideline: https://docs.prismacloud.io/en/enterprise-edition/policy-reference/aws-policies/s3-policies/s3-13-enable-logging
+
+		25 | resource "aws_s3_bucket" "bucket" {
+		26 |   bucket = "taxis-bucket"
+		27 | 
+		28 |   lifecycle_rule {
+		29 |     id     = "log-expiration-policy"
+		30 |     status = "Enabled"
+		31 |     prefix = ""
+		32 | 
+		33 |     transition {
+		34 |       days          = 30
+		35 |       storage_class = "STANDARD_IA"
+		36 |     }
+		37 | 
+		38 |     expiration {
+		39 |       days = 90
+		40 |     }
+		41 |   }
+		42 | }
+</failure>
+		</testcase>
+		<testcase name="[NONE][CKV_AWS_144] Ensure that S3 bucket has cross-region replication enabled" classname="\S3.tf.aws_s3_bucket.bucket" file="\S3.tf">
+			<failure type="failure" message="Ensure that S3 bucket has cross-region replication enabled">
+Resource: aws_s3_bucket.bucket
+File: \S3.tf: 25-42
+Guideline: https://docs.prismacloud.io/en/enterprise-edition/policy-reference/aws-policies/aws-general-policies/ensure-that-s3-bucket-has-cross-region-replication-enabled
+
+		25 | resource "aws_s3_bucket" "bucket" {
+		26 |   bucket = "taxis-bucket"
+		27 | 
+		28 |   lifecycle_rule {
+		29 |     id     = "log-expiration-policy"
+		30 |     status = "Enabled"
+		31 |     prefix = ""
+		32 | 
+		33 |     transition {
+		34 |       days          = 30
+		35 |       storage_class = "STANDARD_IA"
+		36 |     }
+		37 | 
+		38 |     expiration {
+		39 |       days = 90
+		40 |     }
+		41 |   }
+		42 | }
+</failure>
+		</testcase>
+		<testcase name="[NONE][CKV2_AWS_31] Ensure WAF2 has a Logging Configuration" classname="\waf-api.tf.aws_wafv2_web_acl.api_waf_acl" file="\waf-api.tf">
+			<failure type="failure" message="Ensure WAF2 has a Logging Configuration">
+Resource: aws_wafv2_web_acl.api_waf_acl
+File: \waf-api.tf: 1-58
+Guideline: https://docs.prismacloud.io/en/enterprise-edition/policy-reference/aws-policies/aws-logging-policies/bc-aws-logging-33
 
 		Code lines for this resource are too many. Please use IDE of your choice to review the file.</failure>
 		</testcase>
-		<testcase name="[NONE][CKV2_AWS_64] Ensure KMS key Policy is defined" classname="/lambda-taxis.tf.aws_kms_key.lambda_taxis_key" file="/lambda-taxis.tf">
-			<failure type="failure" message="Ensure KMS key Policy is defined">
-Resource: aws_kms_key.lambda_taxis_key
-File: /lambda-taxis.tf: 89-93
-Guideline: https://docs.prismacloud.io/en/enterprise-edition/policy-reference/aws-policies/aws-iam-policies/bc-aws-2-64
-
-		89 | resource &quot;aws_kms_key&quot; &quot;lambda_taxis_key&quot; {
-		90 |   description = &quot;Clave kms para cifrar variables de entorno de la Lambda Taxis&quot;
-		91 |   is_enabled = true
-		92 |   enable_key_rotation = true
-		93 | }
-</failure>
-		</testcase>
-		<testcase name="[NONE][CKV2_AWS_64] Ensure KMS key Policy is defined" classname="/lambda-usuarios.tf.aws_kms_key.lambda_usuarios_key" file="/lambda-usuarios.tf">
-			<failure type="failure" message="Ensure KMS key Policy is defined">
-Resource: aws_kms_key.lambda_usuarios_key
-File: /lambda-usuarios.tf: 89-93
-Guideline: https://docs.prismacloud.io/en/enterprise-edition/policy-reference/aws-policies/aws-iam-policies/bc-aws-2-64
-
-		89 | resource &quot;aws_kms_key&quot; &quot;lambda_usuarios_key&quot; {
-		90 |   description = &quot;Clave kms para cifrar variables de entorno de la Lambda Usuarios&quot;
-		91 |   is_enabled = true
-		92 |   enable_key_rotation = true
-		93 | }
-</failure>
-		</testcase>
-		<testcase name="[NONE][CKV_AWS_21] Ensure all data stored in the S3 bucket have versioning enabled" classname="/S3.tf.aws_s3_bucket.bucket" file="/S3.tf">
-			<failure type="failure" message="Ensure all data stored in the S3 bucket have versioning enabled">
-Resource: aws_s3_bucket.bucket
-File: /S3.tf: 1-3
-Guideline: https://docs.prismacloud.io/en/enterprise-edition/policy-reference/aws-policies/s3-policies/s3-16-enable-versioning
-
-		1 | resource &quot;aws_s3_bucket&quot; &quot;bucket&quot; {
-		2 |   bucket = &quot;taxis-bucket&quot;
-		3 | }
-</failure>
-		</testcase>
-		<testcase name="[NONE][CKV_AWS_144] Ensure that S3 bucket has cross-region replication enabled" classname="/S3.tf.aws_s3_bucket.bucket" file="/S3.tf">
-			<failure type="failure" message="Ensure that S3 bucket has cross-region replication enabled">
-Resource: aws_s3_bucket.bucket
-File: /S3.tf: 1-3
-Guideline: https://docs.prismacloud.io/en/enterprise-edition/policy-reference/aws-policies/aws-general-policies/ensure-that-s3-bucket-has-cross-region-replication-enabled
-
-		1 | resource &quot;aws_s3_bucket&quot; &quot;bucket&quot; {
-		2 |   bucket = &quot;taxis-bucket&quot;
-		3 | }
-</failure>
-		</testcase>
-		<testcase name="[NONE][CKV2_AWS_31] Ensure WAF2 has a Logging Configuration" classname="/waf-api.tf.aws_wafv2_web_acl.api_waf_acl" file="/waf-api.tf">
-			<failure type="failure" message="Ensure WAF2 has a Logging Configuration">
-Resource: aws_wafv2_web_acl.api_waf_acl
-File: /waf-api.tf: 1-36
-Guideline: https://docs.prismacloud.io/en/enterprise-edition/policy-reference/aws-policies/aws-logging-policies/bc-aws-logging-33
-
-		1  | resource &quot;aws_wafv2_web_acl&quot; &quot;api_waf_acl&quot; {
-		2  |   name        = &quot;api-waf-acl&quot;
-		3  |   description = &quot;WAF para proteger el API Gateway&quot;
-		4  |   scope       = &quot;REGIONAL&quot; # Para API Gateway o ALB, siempre &quot;REGIONAL&quot;
-		5  |   default_action {
-		6  |     allow {}
-		7  |   }
-		8  | 
-		9  |   visibility_config {
-		10 |     cloudwatch_metrics_enabled = true
-		11 |     metric_name                = &quot;apiWaf&quot;
-		12 |     sampled_requests_enabled   = true
-		13 |   }
-		14 | 
-		15 |   rule {
-		16 |     name     = &quot;limit-requests&quot;
-		17 |     priority = 1
-		18 | 
-		19 |     action {
-		20 |       block {}
-		21 |     }
-		22 | 
-		23 |     statement {
-		24 |       rate_based_statement {
-		25 |         limit              = 1000
-		26 |         aggregate_key_type = &quot;IP&quot;
-		27 |       }
-		28 |     }
-		29 | 
-		30 |     visibility_config {
-		31 |       cloudwatch_metrics_enabled = true
-		32 |       metric_name                = &quot;limitRequests&quot;
-		33 |       sampled_requests_enabled   = true
-		34 |     }
-		35 |   }
-		36 | }
-</failure>
-		</testcase>
-		<testcase name="[NONE][CKV2_AWS_53] Ensure AWS API gateway request is validated" classname="/apigateway.tf.aws_api_gateway_method.post_registro" file="/apigateway.tf">
-			<failure type="failure" message="Ensure AWS API gateway request is validated">
-Resource: aws_api_gateway_method.post_registro
-File: /apigateway.tf: 15-21
-Guideline: https://docs.prismacloud.io/en/enterprise-edition/policy-reference/aws-policies/aws-general-policies/bc-aws-2-53
-
-		15 | resource &quot;aws_api_gateway_method&quot; &quot;post_registro&quot; {
-		16 |   rest_api_id   = aws_api_gateway_rest_api.api.id
-		17 |   resource_id   = aws_api_gateway_resource.registro.id
-		18 |   http_method   = &quot;POST&quot;
-		19 |   authorization = &quot;NONE&quot;
-		20 |   api_key_required = true
-		21 | }
-</failure>
-		</testcase>
-		<testcase name="[NONE][CKV2_AWS_53] Ensure AWS API gateway request is validated" classname="/apigateway.tf.aws_api_gateway_method.options_registro" file="/apigateway.tf">
-			<failure type="failure" message="Ensure AWS API gateway request is validated">
-Resource: aws_api_gateway_method.options_registro
-File: /apigateway.tf: 92-97
-Guideline: https://docs.prismacloud.io/en/enterprise-edition/policy-reference/aws-policies/aws-general-policies/bc-aws-2-53
-
-		92 | resource &quot;aws_api_gateway_method&quot; &quot;options_registro&quot; {
-		93 |   rest_api_id   = aws_api_gateway_rest_api.api.id
-		94 |   resource_id   = aws_api_gateway_resource.registro.id
-		95 |   http_method   = &quot;OPTIONS&quot;
-		96 |   authorization = &quot;NONE&quot;
-		97 | }
-</failure>
-		</testcase>
-		<testcase name="[NONE][CKV2_AWS_61] Ensure that an S3 bucket has a lifecycle configuration" classname="/S3.tf.aws_s3_bucket.bucket" file="/S3.tf">
-			<failure type="failure" message="Ensure that an S3 bucket has a lifecycle configuration">
-Resource: aws_s3_bucket.bucket
-File: /S3.tf: 1-3
-Guideline: https://docs.prismacloud.io/en/enterprise-edition/policy-reference/aws-policies/aws-logging-policies/bc-aws-2-61
-
-		1 | resource &quot;aws_s3_bucket&quot; &quot;bucket&quot; {
-		2 |   bucket = &quot;taxis-bucket&quot;
-		3 | }
-</failure>
-		</testcase>
-		<testcase name="[NONE][CKV_AWS_18] Ensure the S3 bucket has access logging enabled" classname="/S3.tf.aws_s3_bucket.bucket" file="/S3.tf">
-			<failure type="failure" message="Ensure the S3 bucket has access logging enabled">
-Resource: aws_s3_bucket.bucket
-File: /S3.tf: 1-3
-Guideline: https://docs.prismacloud.io/en/enterprise-edition/policy-reference/aws-policies/s3-policies/s3-13-enable-logging
-
-		1 | resource &quot;aws_s3_bucket&quot; &quot;bucket&quot; {
-		2 |   bucket = &quot;taxis-bucket&quot;
-		3 | }
-</failure>
-		</testcase>
-		<testcase name="[NONE][CKV_AWS_145] Ensure that S3 buckets are encrypted with KMS by default" classname="/S3.tf.aws_s3_bucket.bucket" file="/S3.tf">
-			<failure type="failure" message="Ensure that S3 buckets are encrypted with KMS by default">
-Resource: aws_s3_bucket.bucket
-File: /S3.tf: 1-3
-Guideline: https://docs.prismacloud.io/en/enterprise-edition/policy-reference/aws-policies/aws-general-policies/ensure-that-s3-buckets-are-encrypted-with-kms-by-default
-
-		1 | resource &quot;aws_s3_bucket&quot; &quot;bucket&quot; {
-		2 |   bucket = &quot;taxis-bucket&quot;
-		3 | }
-</failure>
-		</testcase>
 	</testsuite>
-	<testsuite disabled="0" errors="0" failures="5" name="secrets scan" skipped="0" tests="5" time="0">
+	<testsuite disabled="0" errors="0" failures="3" name="secrets scan" skipped="0" tests="3" time="0">
 		<properties>
-			<property name="directory" value="['/app']"/>
+			<property name="directory" value="['C:\\Users\\Admin\\Documents\\Arquitectura-Taxis\\Iac']"/>
 			<property name="add_check" value="False"/>
 			<property name="list" value="False"/>
 			<property name="output" value="['junitxml']"/>
-			<property name="output_file_path" value="/output/results.xml"/>
+			<property name="output_file_path" value="C:\Users\Admin\Documents\checkov.xml"/>
 			<property name="output_bc_ids" value="False"/>
 			<property name="include_all_checkov_policies" value="True"/>
 			<property name="quiet" value="False"/>
@@ -610,7 +315,7 @@ Guideline: https://docs.prismacloud.io/en/enterprise-edition/policy-reference/aw
 			<property name="run_all_external_checks" value="False"/>
 			<property name="soft_fail" value="False"/>
 			<property name="skip_results_upload" value="False"/>
-			<property name="repo_id" value="cli_repo/app"/>
+			<property name="repo_id" value="cli_repo/Iac"/>
 			<property name="branch" value="master"/>
 			<property name="skip_download" value="False"/>
 			<property name="use_enforcement_rules" value="False"/>
@@ -637,7 +342,7 @@ Resource: fe5ad95e8d71938a6c7f0db06c528d030788b678
 File: /lambda-taxis.tf: 64-65
 Guideline: https://docs.prismacloud.io/en/enterprise-edition/policy-reference/secrets-policies/secrets-policy-index/git-secrets-6
 
-		64 |       DB_PASSWORD = &quot;gr**********&quot; //password
+		64 |       DB_PASSWORD = "gr**********" //password
 </failure>
 		</testcase>
 		<testcase name="[NONE][CKV_SECRET_6] Base64 High Entropy String" classname="/lambda-usuarios.tf.fe5ad95e8d71938a6c7f0db06c528d030788b678" file="/lambda-usuarios.tf">
@@ -646,34 +351,16 @@ Resource: fe5ad95e8d71938a6c7f0db06c528d030788b678
 File: /lambda-usuarios.tf: 64-65
 Guideline: https://docs.prismacloud.io/en/enterprise-edition/policy-reference/secrets-policies/secrets-policy-index/git-secrets-6
 
-		64 |       DB_PASSWORD = &quot;gr**********&quot; //password
+		64 |       DB_PASSWORD = "gr**********" //password
 </failure>
 		</testcase>
 		<testcase name="[NONE][CKV_SECRET_6] Base64 High Entropy String" classname="/lambda-viajes.tf.fe5ad95e8d71938a6c7f0db06c528d030788b678" file="/lambda-viajes.tf">
 			<failure type="failure" message="Base64 High Entropy String">
 Resource: fe5ad95e8d71938a6c7f0db06c528d030788b678
-File: /lambda-viajes.tf: 63-64
+File: /lambda-viajes.tf: 82-83
 Guideline: https://docs.prismacloud.io/en/enterprise-edition/policy-reference/secrets-policies/secrets-policy-index/git-secrets-6
 
-		63 |       DB_PASSWORD = &quot;gr**********&quot; //password
-</failure>
-		</testcase>
-		<testcase name="[NONE][CKV_SECRET_2] AWS Access Key" classname="/main.tf.e879a01442c394045ff6eae54a11b3b01124f6f3" file="/main.tf">
-			<failure type="failure" message="AWS Access Key">
-Resource: e879a01442c394045ff6eae54a11b3b01124f6f3
-File: /main.tf: 12-13
-Guideline: https://docs.prismacloud.io/en/enterprise-edition/policy-reference/secrets-policies/secrets-policy-index/git-secrets-2
-
-		12 |     access_key = &quot;AKIA5**********&quot;
-</failure>
-		</testcase>
-		<testcase name="[NONE][CKV_SECRET_6] Base64 High Entropy String" classname="/main.tf.ceeeee0442d9f1dd3ba60188ee4aee276da517d9" file="/main.tf">
-			<failure type="failure" message="Base64 High Entropy String">
-Resource: ceeeee0442d9f1dd3ba60188ee4aee276da517d9
-File: /main.tf: 13-14
-Guideline: https://docs.prismacloud.io/en/enterprise-edition/policy-reference/secrets-policies/secrets-policy-index/git-secrets-6
-
-		13 |     secret_key = &quot;dVC+47**********&quot;
+		82 |       DB_PASSWORD = "gr**********" //password
 </failure>
 		</testcase>
 	</testsuite>
