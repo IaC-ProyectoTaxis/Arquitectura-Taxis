@@ -20,6 +20,24 @@ resource "aws_iam_role" "lambda_viajes_exec_role" { //Rol Necesario para ejecuta
   })
 }
 
+resource "aws_iam_role_policy" "lambda_dlq_policy" {
+  name = "lambda-viajes-dlq-policy"
+  role = aws_iam_role.lambda_viajes_exec_role.name
+
+  policy = jsonencode({
+    Version = "2012-10-17",
+    Statement = [
+      {
+        Effect = "Allow",
+        Action = [
+          "sqs:SendMessage"
+        ],
+        Resource = aws_sqs_queue.lambda_dlq.arn
+      }
+    ]
+  })
+}
+
 resource "aws_iam_role_policy" "lambda_xray_policy" {
   name = "lambda-xray-permissions"
   role = aws_iam_role.lambda_viajes_exec_role.id
@@ -67,6 +85,10 @@ resource "aws_iam_role_policy_attachment" "AWSLambdaVPCAccessExecutionRole_viaje
     policy_arn = "arn:aws:iam::aws:policy/service-role/AWSLambdaVPCAccessExecutionRole"
 }
 
+resource "aws_sqs_queue" "lambda_dlq" {
+  name = "lambda-viajes-dlq"
+}
+
 resource "aws_lambda_function" "viajes" {
   function_name    = "viajes"
   handler          = "index.handler"
@@ -99,7 +121,10 @@ resource "aws_lambda_function" "viajes" {
   }
   
   code_signing_config_arn = aws_lambda_code_signing_config.example.arn
-  
+
+  dead_letter_config {
+    target_arn = aws_sqs_queue.lambda_dlq.arn
+  }
 }
 
 resource "aws_signer_signing_profile" "viajes_signing_profile" {
