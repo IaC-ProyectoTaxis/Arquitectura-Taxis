@@ -73,6 +73,23 @@ resource "aws_lambda_function" "viajes" {
     security_group_ids = [data.aws_security_group.lambda_sg.id] //Definir el security group
   }
   
+  code_signing_config_arn = aws_lambda_code_signing_config.example.arn
+  
+}
+
+resource "aws_signer_signing_profile" "viajes_signing_profile" {
+  name     = "viajes-signing-profile"
+  platform_id = "AWSLambda-SHA384-ECDSA" // Plataforma para funciones Lambda
+}
+
+resource "aws_lambda_code_signing_config" "viajes_signing_config" {
+  allowed_publishers {
+    signing_profile_version_arns = [aws_signer_signing_profile.viajes_signing_profile.version_arn]
+  }
+
+  policies {
+    untrusted_artifact_on_deployment = "Enforce"
+  }
 }
 
 resource "aws_lambda_permission" "allow_s3_viajes" { //Permiso para que el s3 pueda invocar el lambda
