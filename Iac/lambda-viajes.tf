@@ -20,6 +20,25 @@ resource "aws_iam_role" "lambda_viajes_exec_role" { //Rol Necesario para ejecuta
   })
 }
 
+resource "aws_iam_role_policy" "lambda_xray_policy" {
+  name = "lambda-xray-permissions"
+  role = aws_iam_role.lambda_viajes_exec_role.id
+
+  policy = jsonencode({
+    "Version": "2012-10-17",
+    "Statement": [
+      {
+        "Effect": "Allow",
+        "Action": [
+          "xray:PutTraceSegments",
+          "xray:PutTelemetryRecords"
+        ],
+        "Resource": "*"
+      }
+    ]
+  })
+}
+
 resource "aws_iam_policy" "lambda_policy_viajes" {
   name = "viajes_policy"
   policy = jsonencode({
