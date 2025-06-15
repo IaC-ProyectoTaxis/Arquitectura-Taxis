@@ -1,5 +1,20 @@
 resource "aws_s3_bucket" "bucket" {
   bucket = "taxis-bucket"
+
+  lifecycle_rule {
+    id      = "log-expiration-policy"
+    status  = "Enabled"
+    prefix  = "" 
+
+    transition {
+      days          = 30               
+      storage_class = "STANDARD_IA"   
+    }
+
+    expiration {
+      days = 90  
+    }
+  }
 }
 
 resource "aws_s3_bucket_public_access_block" "bucket_public_access" {
