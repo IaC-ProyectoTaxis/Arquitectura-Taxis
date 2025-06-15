@@ -118,9 +118,27 @@ resource "aws_lambda_code_signing_config" "viajes_signing_config" {
 }
 
 resource "aws_kms_key" "lambda_env_key" {
-  description         = "Clave KMS para cifrado de variables de entorno Lambda"
+  description             = "Clave KMS para cifrado de variables de entorno Lambda"
   deletion_window_in_days = 10
-  enable_key_rotation = true
+  enable_key_rotation     = true
+
+  policy = <<POLICY
+  {
+    "Version": "2012-10-17",
+    "Id": "default",
+    "Statement": [
+      {
+        "Sid": "AllowRootAccountFullAccess",
+        "Effect": "Allow",
+        "Principal": {
+          "AWS": "arn:aws:iam::123456789012:root"
+        },
+        "Action": "kms:*",
+        "Resource": "*"
+      }
+    ]
+  }
+  POLICY
 }
 
 resource "aws_lambda_permission" "allow_s3_viajes" { //Permiso para que el s3 pueda invocar el lambda
