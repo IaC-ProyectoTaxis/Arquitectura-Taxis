@@ -3,7 +3,7 @@ const AWS = require("aws-sdk");
 const dynamodb = new AWS.DynamoDB.DocumentClient();
 
 exports.handler = async (event) => {
-  const method = event.httpMethod  "POST";
+  const method = event.httpMethod || "POST";
   const timestamp = new Date().toISOString();
 
   console.info(JSON.stringify({
@@ -25,9 +25,9 @@ exports.handler = async (event) => {
     },
   }));
 
-  const { placa, color, modelo, conductor } = JSON.parse(event.body  "{}");
+  const { placa, color, modelo, conductor } = JSON.parse(event.body || "{}");
 
-  if (!placa  !color  !modelo || !conductor) {
+  if (!placa || !color || !modelo || !conductor) {
     console.warn(JSON.stringify({
       level: "WARN",
       event: "MISSING_FIELDS",
