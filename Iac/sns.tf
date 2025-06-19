@@ -19,3 +19,23 @@ resource "aws_sns_topic_subscription" "viajes_sub" {
   protocol  = "sqs"
   endpoint  = aws_sqs_queue.viajes_queue.arn
 }
+
+resource "aws_iam_policy" "lambda_publish_sns" {
+  name = "lambda-publish-to-sns"
+
+  policy = jsonencode({
+    Version = "2012-10-17",
+    Statement = [
+      {
+        Effect = "Allow",
+        Action = ["sns:Publish"],
+        Resource = aws_sns_topic.app_events.arn
+      }
+    ]
+  })
+}
+
+resource "aws_iam_role_policy_attachment" "usuarios_publish_sns_attach" {
+  role       = aws_iam_role.lambda_usuarios_exec_role.name
+  policy_arn = aws_iam_policy.lambda_publish_sns.arn
+}
