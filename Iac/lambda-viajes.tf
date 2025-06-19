@@ -99,14 +99,6 @@ resource "aws_lambda_function" "viajes" {
   filename         = data.archive_file.lambda_viajes.output_path
   source_code_hash = data.archive_file.lambda_viajes.output_base64sha512
 
-  environment {
-    variables = {
-      DB_HOST     = "db-taxis-viajes-usuarios.cbmia0266pjz.us-east-2.rds.amazonaws.com" //endpoint
-      DB_USER     = "IACgrupo7" //master username
-      DB_PASSWORD = "grupo7_rds" //password
-      DB_NAME     = "db-taxis-viajes-usuarios"
-    }
-  }
 
   kms_key_arn = aws_kms_key.lambda_env_key.arn
   
