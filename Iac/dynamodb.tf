@@ -83,3 +83,19 @@ resource "aws_iam_role_policy_attachment" "viajes_dynamodb_attach" {
   role       = aws_iam_role.lambda_viajes_exec_role.name
   policy_arn = aws_iam_policy.lambda_dynamodb_policy.arn
 }
+
+resource "aws_vpc_endpoint" "dynamodb" {
+  vpc_id            = "vpc-0fc1da5103d68dcc7"
+  service_name      = "com.amazonaws.us-east-2.dynamodb"
+  vpc_endpoint_type = "Gateway"
+  route_table_ids   = [
+    "rtb-0294f8f132e83410b",
+    "rtb-0c83d8a3b0bceaed4",
+    "rtb-017dca6e605994730",
+    "rtb-00f25f1ecec4f550c"
+  ]
+
+  tags = {
+    Name = "dynamodb-endpoint"
+  }
+}
