@@ -99,14 +99,6 @@ resource "aws_lambda_function" "viajes" {
   filename         = data.archive_file.lambda_viajes.output_path
   source_code_hash = data.archive_file.lambda_viajes.output_base64sha512
 
-  environment {
-    variables = {
-      DB_HOST     = "db-taxis-viajes-usuarios.cbmia0266pjz.us-east-2.rds.amazonaws.com" //endpoint
-      DB_USER     = "IACgrupo7" //master username
-      DB_PASSWORD = "grupo7_rds" //password
-      DB_NAME     = "db-taxis-viajes-usuarios"
-    }
-  }
 
   kms_key_arn = aws_kms_key.lambda_env_key.arn
   
@@ -129,7 +121,31 @@ resource "aws_lambda_function" "viajes" {
   }
 }
 
+#politica sqs
+resource "aws_iam_policy" "lambda_viajes_sqs_policy" {
+  name = "lambda-viajes-sqs-policy"
 
+  policy = jsonencode({
+    Version = "2012-10-17",
+    Statement = [
+      {
+        Effect = "Allow",
+        Action = [
+          "sqs:ReceiveMessage",
+          "sqs:DeleteMessage",
+          "sqs:GetQueueAttributes"
+        ],
+        Resource = aws_sqs_queue.viajes_queue.arn
+      }
+    ]
+  })
+}
+
+#adjuntar politica del rol
+resource "aws_iam_role_policy_attachment" "lambda_viajes_sqs_attach" {
+  role       = aws_iam_role.lambda_viajes_exec_role.name
+  policy_arn = aws_iam_policy.lambda_viajes_sqs_policy.arn
+}
 
 resource "aws_kms_key" "lambda_env_key" {
   description             = "Clave KMS para cifrado de variables de entorno Lambda"
