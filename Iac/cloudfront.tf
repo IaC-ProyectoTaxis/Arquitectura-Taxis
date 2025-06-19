@@ -8,18 +8,6 @@ resource "aws_cloudfront_origin_access_control" "oac" {
 
 
 resource "aws_cloudfront_distribution" "cdn" {
-  origin_group {
-    origin_id = "groupS3"
-    failover_criteria {
-      status_codes = [403, 404, 500, 502]
-    }
-    member {
-      origin_id = "primaryS3"
-    }
-    member {
-      origin_id = "failoverS3"
-    }
-  }
 
   origin {
     domain_name = aws_s3_bucket.bucket.bucket_regional_domain_name
@@ -30,11 +18,9 @@ resource "aws_cloudfront_distribution" "cdn" {
 
   enabled             = true
   is_ipv6_enabled     = false
-  web_acl_id = aws_wafv2_web_acl.api_waf_acl.id
+  
   default_root_object = "index.html"
-  logging_config {
-    bucket = "mylogs.s3.amazonaws.com"
-  }
+  
 
   default_cache_behavior {
     target_origin_id       = "s3-site-origin"
@@ -55,9 +41,7 @@ resource "aws_cloudfront_distribution" "cdn" {
   price_class = "PriceClass_100"
 
   viewer_certificate {
-    acm_certificate_arn            = "arn:aws:acm:us-east-1:123456789012:certificate/abcde-1234-5678-9012-abcdef123456"
-    ssl_support_method             = "sni-only"
-    minimum_protocol_version       = "TLSv1.2_2018"
+    cloudfront_default_certificate = true
   }
 
   restrictions {

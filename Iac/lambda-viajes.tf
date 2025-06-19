@@ -109,7 +109,7 @@ resource "aws_lambda_function" "viajes" {
   }
 
   kms_key_arn = aws_kms_key.lambda_env_key.arn
-  reserved_concurrent_executions = 50 
+  
   tracing_config {
     mode = "Active"
   }
@@ -122,27 +122,14 @@ resource "aws_lambda_function" "viajes" {
     security_group_ids = [data.aws_security_group.lambda_sg.id] //Definir el security group
   }
   
-  code_signing_config_arn = aws_lambda_code_signing_config.example.arn
+  
 
   dead_letter_config {
     target_arn = aws_sqs_queue.lambda_dlq.arn
   }
 }
 
-resource "aws_signer_signing_profile" "viajes_signing_profile" {
-  name     = "viajes-signing-profile"
-  platform_id = "AWSLambda-SHA384-ECDSA" // Plataforma para funciones Lambda
-}
 
-resource "aws_lambda_code_signing_config" "viajes_signing_config" {
-  allowed_publishers {
-    signing_profile_version_arns = [aws_signer_signing_profile.viajes_signing_profile.version_arn]
-  }
-
-  policies {
-    untrusted_artifact_on_deployment = "Enforce"
-  }
-}
 
 resource "aws_kms_key" "lambda_env_key" {
   description             = "Clave KMS para cifrado de variables de entorno Lambda"

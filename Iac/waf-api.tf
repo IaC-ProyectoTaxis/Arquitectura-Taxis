@@ -57,6 +57,9 @@ resource "aws_wafv2_web_acl" "api_waf_acl" {
   }
 }
 
+
+
+
 resource "aws_wafv2_web_acl_association" "api_waf_assoc" {
   resource_arn = "arn:aws:apigateway:us-east-2::/restapis/${aws_api_gateway_rest_api.api.id}/stages/${aws_api_gateway_deployment.api_deploy.stage_name}"
   web_acl_arn  = aws_wafv2_web_acl.api_waf_acl.arn

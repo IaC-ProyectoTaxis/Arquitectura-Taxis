@@ -55,7 +55,7 @@ resource "aws_lambda_function" "taxis" {
   role             = aws_iam_role.lambda_taxis_exec_role.arn // El arn es el ID para conectar el rol con el recurso
   filename         = data.archive_file.lambda_taxis.output_path
   source_code_hash = data.archive_file.lambda_taxis.output_base64sha512
-  code_signing_config_arn = aws_lambda_function.taxis.code_signing_config_arn
+ 
 
   environment {
     variables = {
@@ -67,10 +67,10 @@ resource "aws_lambda_function" "taxis" {
   }
 
   kms_key_arn = aws_kms_key.lambda_taxis_key.arn
-  reserved_concurrent_executions = 100
-  dead_letter_config {
-    target_arn = "test"
-  }
+  
+  // dead_letter_config {
+  //  target_arn = "test"
+  // } 
 
   tracing_config {
     mode = "Active"
@@ -85,6 +85,9 @@ resource "aws_lambda_function" "taxis" {
   }
   
 }
+
+
+
 
 resource "aws_kms_key" "lambda_taxis_key" {
   description          = "Clave kms para cifrar variables de entorno de la Lambda Taxis"

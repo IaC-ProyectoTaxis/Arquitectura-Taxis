@@ -27,7 +27,7 @@ resource "aws_s3_bucket" "bucket" {
 
   lifecycle_rule {
     id     = "log-expiration-policy"
-    status = "Enabled"
+    enabled = true
     prefix = ""
 
     transition {
