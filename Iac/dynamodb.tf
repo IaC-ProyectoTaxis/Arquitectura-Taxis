@@ -43,3 +43,28 @@ resource "aws_dynamodb_table" "viajes" {
     Environment = "prod"
   }
 }
+
+resource "aws_iam_policy" "lambda_dynamodb_policy" {
+  name = "lambda-dynamodb-access"
+  policy = jsonencode({
+    Version = "2012-10-17",
+    Statement = [
+      {
+        Effect = "Allow",
+        Action = [
+          "dynamodb:PutItem",
+          "dynamodb:GetItem",
+          "dynamodb:Scan",
+          "dynamodb:Query",
+          "dynamodb:UpdateItem",
+          "dynamodb:DeleteItem"
+        ],
+        Resource = [
+          aws_dynamodb_table.usuarios.arn,
+          aws_dynamodb_table.taxis.arn,
+          aws_dynamodb_table.viajes.arn
+        ]
+      }
+    ]
+  })
+}
