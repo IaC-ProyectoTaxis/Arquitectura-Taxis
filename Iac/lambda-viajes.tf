@@ -20,6 +20,43 @@ resource "aws_iam_role" "lambda_viajes_exec_role" { //Rol Necesario para ejecuta
   })
 }
 
+resource "aws_iam_role_policy" "lambda_dlq_policy" {
+  name = "lambda-viajes-dlq-policy"
+  role = aws_iam_role.lambda_viajes_exec_role.name
+
+  policy = jsonencode({
+    Version = "2012-10-17",
+    Statement = [
+      {
+        Effect = "Allow",
+        Action = [
+          "sqs:SendMessage"
+        ],
+        Resource = aws_sqs_queue.lambda_dlq.arn
+      }
+    ]
+  })
+}
+
+resource "aws_iam_role_policy" "lambda_xray_policy" {
+  name = "lambda-xray-permissions"
+  role = aws_iam_role.lambda_viajes_exec_role.id
+
+  policy = jsonencode({
+    "Version": "2012-10-17",
+    "Statement": [
+      {
+        "Effect": "Allow",
+        "Action": [
+          "xray:PutTraceSegments",
+          "xray:PutTelemetryRecords"
+        ],
+        "Resource": "*"
+      }
+    ]
+  })
+}
+
 resource "aws_iam_policy" "lambda_policy_viajes" {
   name = "viajes_policy"
   policy = jsonencode({
@@ -48,10 +85,16 @@ resource "aws_iam_role_policy_attachment" "AWSLambdaVPCAccessExecutionRole_viaje
     policy_arn = "arn:aws:iam::aws:policy/service-role/AWSLambdaVPCAccessExecutionRole"
 }
 
+resource "aws_sqs_queue" "lambda_dlq" {
+  name                              = "lambda-viajes-dlq"
+  kms_master_key_id                 = "aws_kms_key.lambda_env_key.arn" 
+  kms_data_key_reuse_period_seconds = 300            
+}
+
 resource "aws_lambda_function" "viajes" {
   function_name    = "viajes"
   handler          = "index.handler"
-  runtime          = "nodejs16.x"
+  runtime          = "nodejs20.x"
   role             = aws_iam_role.lambda_viajes_exec_role.arn // El arn es el ID para conectar el rol con el recurso
   filename         = data.archive_file.lambda_viajes.output_path
   source_code_hash = data.archive_file.lambda_viajes.output_base64sha512
@@ -65,6 +108,12 @@ resource "aws_lambda_function" "viajes" {
     }
   }
 
+  kms_key_arn = aws_kms_key.lambda_env_key.arn
+  reserved_concurrent_executions = 50 
+  tracing_config {
+    mode = "Active"
+  }
+
   vpc_config {
     subnet_ids         = [
                           data.aws_subnet.public1-us-east-2a.id, //Definir a que subnet ira la lambda
@@ -73,6 +122,50 @@ resource "aws_lambda_function" "viajes" {
     security_group_ids = [data.aws_security_group.lambda_sg.id] //Definir el security group
   }
   
+  code_signing_config_arn = aws_lambda_code_signing_config.example.arn
+
+  dead_letter_config {
+    target_arn = aws_sqs_queue.lambda_dlq.arn
+  }
+}
+
+resource "aws_signer_signing_profile" "viajes_signing_profile" {
+  name     = "viajes-signing-profile"
+  platform_id = "AWSLambda-SHA384-ECDSA" // Plataforma para funciones Lambda
+}
+
+resource "aws_lambda_code_signing_config" "viajes_signing_config" {
+  allowed_publishers {
+    signing_profile_version_arns = [aws_signer_signing_profile.viajes_signing_profile.version_arn]
+  }
+
+  policies {
+    untrusted_artifact_on_deployment = "Enforce"
+  }
+}
+
+resource "aws_kms_key" "lambda_env_key" {
+  description             = "Clave KMS para cifrado de variables de entorno Lambda"
+  deletion_window_in_days = 10
+  enable_key_rotation     = true
+
+  policy = <<POLICY
+  {
+    "Version": "2012-10-17",
+    "Id": "default",
+    "Statement": [
+      {
+        "Sid": "AllowRootAccountFullAccess",
+        "Effect": "Allow",
+        "Principal": {
+          "AWS": "arn:aws:iam::923789128997:root"
+        },
+        "Action": "kms:*",
+        "Resource": "*"
+      }
+    ]
+  }
+  POLICY
 }
 
 resource "aws_lambda_permission" "allow_s3_viajes" { //Permiso para que el s3 pueda invocar el lambda

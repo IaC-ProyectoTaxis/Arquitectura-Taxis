@@ -51,10 +51,11 @@ resource "aws_iam_role_policy_attachment" "AWSLambdaVPCAccessExecutionRole" { //
 resource "aws_lambda_function" "taxis" {
   function_name    = "taxis"
   handler          = "index.handler"
-  runtime          = "nodejs16.x"
+  runtime          = "nodejs18.x"
   role             = aws_iam_role.lambda_taxis_exec_role.arn // El arn es el ID para conectar el rol con el recurso
   filename         = data.archive_file.lambda_taxis.output_path
   source_code_hash = data.archive_file.lambda_taxis.output_base64sha512
+  code_signing_config_arn = aws_lambda_function.taxis.code_signing_config_arn
 
   environment {
     variables = {
@@ -63,6 +64,16 @@ resource "aws_lambda_function" "taxis" {
       DB_PASSWORD = "grupo7_rds" //password
       DB_NAME     = "db-taxis-viajes-usuarios"
     }
+  }
+
+  kms_key_arn = aws_kms_key.lambda_taxis_key.arn
+  reserved_concurrent_executions = 100
+  dead_letter_config {
+    target_arn = "test"
+  }
+
+  tracing_config {
+    mode = "Active"
   }
 
   vpc_config {
@@ -74,6 +85,30 @@ resource "aws_lambda_function" "taxis" {
   }
   
 }
+
+resource "aws_kms_key" "lambda_taxis_key" {
+  description          = "Clave kms para cifrar variables de entorno de la Lambda Taxis"
+  is_enabled           = true
+  enable_key_rotation  = true
+
+  policy = jsonencode({
+    Version = "2012-10-17",
+    Id      = "lambda-kms-key-default-policy",
+    Statement = [
+      {
+        Sid      = "Enable IAM User Permissions",
+        Effect   = "Allow",
+        Principal = {
+          AWS = "arn:aws:iam::${data.aws_caller_identity.current.account_id}:root"
+        },
+        Action   = "kms:*",
+        Resource = "*"
+      }
+    ]
+  })
+}
+
+data "aws_caller_identity" "current" {}
 
 data "aws_subnet" "public1-us-east-2a" {
   id = "subnet-0f3b032d13c823454"

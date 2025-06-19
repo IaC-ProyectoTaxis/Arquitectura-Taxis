@@ -33,6 +33,28 @@ resource "aws_wafv2_web_acl" "api_waf_acl" {
       sampled_requests_enabled   = true
     }
   }
+
+   rule {
+    name     = "AWS-AWSManagedRulesKnownBadInputsRuleSet"
+    priority = 2
+
+    override_action {
+      none {}
+    }
+
+    statement {
+      managed_rule_group_statement {
+        name        = "AWSManagedRulesKnownBadInputsRuleSet"
+        vendor_name = "AWS"
+      }
+    }
+
+    visibility_config {
+      cloudwatch_metrics_enabled = true
+      metric_name                = "KnownBadInputsRuleSet"
+      sampled_requests_enabled   = true
+    }
+  }
 }
 
 resource "aws_wafv2_web_acl_association" "api_waf_assoc" {

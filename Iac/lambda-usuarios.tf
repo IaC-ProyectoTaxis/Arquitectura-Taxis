@@ -51,10 +51,11 @@ resource "aws_iam_role_policy_attachment" "AWSLambdaVPCAccessExecutionRole_usuar
 resource "aws_lambda_function" "usuarios" {
   function_name    = "usuarios"
   handler          = "index.handler"
-  runtime          = "nodejs16.x"
+  runtime          = "nodejs18.x"
   role             = aws_iam_role.lambda_usuarios_exec_role.arn // El arn es el ID para conectar el rol con el recurso
   filename         = data.archive_file.lambda_usuarios.output_path
   source_code_hash = data.archive_file.lambda_usuarios.output_base64sha512
+  code_signing_config_arn = aws_lambda_function.usuarios.code_signing_config_arn
 
   environment {
     variables = {
@@ -65,6 +66,16 @@ resource "aws_lambda_function" "usuarios" {
     }
   }
 
+  kms_key_arn = aws_kms_key.lambda_usuarios_key.arn
+  reserved_concurrent_executions = 100
+  dead_letter_config {
+    target_arn = "test"
+  }
+
+  tracing_config {
+    mode = "Active"
+  }
+
   vpc_config {
     subnet_ids         = [
                           data.aws_subnet.public1-us-east-2a.id, //Definir a que subnet ira la lambda
@@ -73,6 +84,30 @@ resource "aws_lambda_function" "usuarios" {
     security_group_ids = [data.aws_security_group.lambda_sg.id] //Definir el security group
   }
   
+}
+
+data "aws_caller_identity" "current" {}
+
+resource "aws_kms_key" "lambda_usuarios_key" {
+  description          = "Clave kms para cifrar variables de entorno de la Lambda Usuarios"
+  is_enabled           = true
+  enable_key_rotation  = true
+
+  policy = jsonencode({
+    Version = "2012-10-17",
+    Id      = "lambda-usuarios-kms-key-policy",
+    Statement = [
+      {
+        Sid: "AllowRootAccountFullAccess",
+        Effect: "Allow",
+        Principal: {
+          AWS: "arn:aws:iam::${data.aws_caller_identity.current.account_id}:root"
+        },
+        Action: "kms:*",
+        Resource: "*"
+      }
+    ]
+  })
 }
 
 resource "aws_lambda_permission" "allow_s3_usuarios" { //Permiso para que el s3 pueda invocar el lambda

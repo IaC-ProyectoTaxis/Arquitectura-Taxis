@@ -1,6 +1,9 @@
 resource "aws_api_gateway_rest_api" "api" {
   name        = "api-taxis"
   description = "API para registrar datos desde el frontend"
+  lifecycle {
+    create_before_destroy = true
+  }
 }
 
 resource "aws_api_gateway_resource" "registro" {
@@ -14,6 +17,16 @@ resource "aws_api_gateway_method" "post_registro" {
   resource_id   = aws_api_gateway_resource.registro.id
   http_method   = "POST"
   authorization = "NONE"
+  api_key_required = true
+  request_validator_id = aws_api_gateway_request_validator.validate_body.id
+}
+
+
+resource "aws_api_gateway_request_validator" "validate_body" {
+  rest_api_id = aws_api_gateway_rest_api.api.id
+  name        = "validate-body-only"
+  validate_request_body = true
+  validate_request_parameters = false
 }
 
 resource "aws_api_gateway_integration" "lambda_post_registro_usuario" {
@@ -76,6 +89,10 @@ resource "aws_api_gateway_deployment" "api_deploy" {
   rest_api_id = aws_api_gateway_rest_api.api.id
   stage_name = "prod"
 
+  lifecycle {
+    create_before_destroy = true
+  }
+
   triggers = {
     redeploy = timestamp()
   }
@@ -86,7 +103,17 @@ resource "aws_api_gateway_method" "options_registro" {
   resource_id   = aws_api_gateway_resource.registro.id
   http_method   = "OPTIONS"
   authorization = "NONE"
+  request_validator_id = aws_api_gateway_request_validator.validate_options.id
 }
+
+
+resource "aws_api_gateway_request_validator" "validate_options" {
+  rest_api_id                = aws_api_gateway_rest_api.api.id
+  name                       = "validate-options-request"
+  validate_request_body      = false
+  validate_request_parameters = true
+}
+
 
 resource "aws_api_gateway_integration" "options_mock" {
   rest_api_id          = aws_api_gateway_rest_api.api.id
