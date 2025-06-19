@@ -68,3 +68,18 @@ resource "aws_iam_policy" "lambda_dynamodb_policy" {
     ]
   })
 }
+
+resource "aws_iam_role_policy_attachment" "usuarios_dynamodb_attach" {
+  role       = aws_iam_role.lambda_usuarios_exec_role.name
+  policy_arn = aws_iam_policy.lambda_dynamodb_policy.arn
+}
+
+resource "aws_iam_role_policy_attachment" "taxis_dynamodb_attach" {
+  role       = aws_iam_role.lambda_taxis_exec_role.name
+  policy_arn = aws_iam_policy.lambda_dynamodb_policy.arn
+}
+
+resource "aws_iam_role_policy_attachment" "viajes_dynamodb_attach" {
+  role       = aws_iam_role.lambda_viajes_exec_role.name
+  policy_arn = aws_iam_policy.lambda_dynamodb_policy.arn
+}
