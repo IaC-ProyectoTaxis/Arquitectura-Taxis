@@ -69,3 +69,21 @@ resource "aws_sqs_queue_policy" "viajes_queue_policy" {
     ]
   })
 }
+
+resource "aws_lambda_event_source_mapping" "taxis_sqs_trigger" {
+  event_source_arn = aws_sqs_queue.taxis_queue.arn
+  function_name    = aws_lambda_function.taxis.arn
+  batch_size       = 1
+}
+
+resource "aws_lambda_event_source_mapping" "viajes_sqs_trigger" {
+  event_source_arn = aws_sqs_queue.viajes_queue.arn
+  function_name    = aws_lambda_function.viajes.arn
+  batch_size       = 1
+}
+
+resource "aws_lambda_event_source_mapping" "usuarios_sqs_trigger" {
+  event_source_arn = aws_sqs_queue.usuarios_queue.arn
+  function_name    = aws_lambda_function.usuarios.arn
+  batch_size       = 1
+}
