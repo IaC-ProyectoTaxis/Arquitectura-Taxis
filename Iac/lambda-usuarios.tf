@@ -79,6 +79,31 @@ resource "aws_lambda_function" "usuarios" {
 }
 
 
+#politica sqs
+resource "aws_iam_policy" "lambda_usuarios_sqs_policy" {
+  name = "lambda-usuarios-sqs-policy"
+
+  policy = jsonencode({
+    Version = "2012-10-17",
+    Statement = [
+      {
+        Effect = "Allow",
+        Action = [
+          "sqs:ReceiveMessage",
+          "sqs:DeleteMessage",
+          "sqs:GetQueueAttributes"
+        ],
+        Resource = aws_sqs_queue.usuarios_queue.arn
+      }
+    ]
+  })
+}
+#adjuntar politica
+resource "aws_iam_role_policy_attachment" "lambda_usuarios_sqs_attach" {
+  role       = aws_iam_role.lambda_usuarios_exec_role.name
+  policy_arn = aws_iam_policy.lambda_usuarios_sqs_policy.arn
+}
+
 
 
 resource "aws_kms_key" "lambda_usuarios_key" {

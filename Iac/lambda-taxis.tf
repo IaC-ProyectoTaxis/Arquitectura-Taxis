@@ -79,6 +79,38 @@ resource "aws_lambda_function" "taxis" {
   
 }
 
+resource "aws_iam_policy" "lambda_taxis_sqs_policy" {
+  name = "lambda-taxis-sqs-policy"
+
+  policy = jsonencode({
+    Version = "2012-10-17",
+    Statement = [
+      {
+        Effect = "Allow",
+        Action = [
+          "sqs:ReceiveMessage",
+          "sqs:DeleteMessage",
+          "sqs:GetQueueAttributes"
+        ],
+        Resource = aws_sqs_queue.taxis_queue.arn
+      }
+    ]
+  })
+}
+
+resource "aws_iam_role_policy_attachment" "lambda_taxis_sqs_attach" {
+  role       = aws_iam_role.lambda_taxis_exec_role.name
+  policy_arn = aws_iam_policy.lambda_taxis_sqs_policy.arn
+}
+
+resource "aws_security_group_rule" "allow_all_egress" {
+  type              = "egress"
+  from_port         = 0
+  to_port           = 0
+  protocol          = "-1"
+  cidr_blocks       = ["0.0.0.0/0"]
+  security_group_id = data.aws_security_group.lambda_sg.id
+}
 
 
 
