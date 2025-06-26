@@ -1,44 +1,34 @@
 const { handler } = require("./index");
-const AWS = require("aws-sdk");
 
-jest.mock("aws-sdk", () => {
-  const mockPut = jest.fn().mockReturnValue({
-    promise: jest.fn().mockResolvedValue({}),
-  });
-  return {
-    DynamoDB: {
-      DocumentClient: jest.fn(() => ({
-        put: mockPut,
-      })),
-    },
-  };
-});
-
-describe("Lambda Taxis", () => {
-  it("retorna 400 si faltan campos obligatorios", async () => {
-    const event = {
-      httpMethod: "POST",
-      body: JSON.stringify({ placa: "XYZ123" }) // faltan campos
+describe("Lambda Taxis (Integración con DynamoDB AWS)", () => {
+  test("debería insertar taxi válido y retornar 200", async () => {
+    const taxi = {
+      placa: "XYZ123",
+      color: "Rojo",
+      modelo: "Toyota",
+      conductor: "Juan Pérez"
     };
 
-    const res = await handler(event);
-    expect(res.statusCode).toBe(400);
-    expect(JSON.parse(res.body)).toHaveProperty("error", "Faltan datos obligatorios");
-  });
-
-  it("retorna 200 si todos los campos están presentes", async () => {
     const event = {
       httpMethod: "POST",
-      body: JSON.stringify({
-        placa: "XYZ123",
-        color: "Rojo",
-        modelo: "Toyota",
-        conductor: "Juan Perez"
-      })
+      body: JSON.stringify(taxi),
     };
 
-    const res = await handler(event);
-    expect(res.statusCode).toBe(200);
-    expect(JSON.parse(res.body)).toHaveProperty("message", "Taxi agregado");
+    const response = await handler(event);
+
+    expect(response.statusCode).toBe(200);
+    expect(JSON.parse(response.body)).toHaveProperty("message", "Taxi agregado");
+  });
+
+  test("debería retornar 400 si faltan campos", async () => {
+    const event = {
+      httpMethod: "POST",
+      body: JSON.stringify({ placa: "XYZ123" }), 
+    };
+
+    const response = await handler(event);
+
+    expect(response.statusCode).toBe(400);
+    expect(JSON.parse(response.body)).toHaveProperty("error", "Faltan datos obligatorios");
   });
 });

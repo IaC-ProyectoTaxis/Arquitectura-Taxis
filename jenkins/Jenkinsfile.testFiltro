@@ -8,7 +8,7 @@ pipeline {
   stages {
     stage('Instalar dependencias') {
       steps {
-        dir('/var/terraform_project/usuarios') {
+        dir('/var/terraform_project/filtro') {
           sh 'npm install'
         }
       }
@@ -16,7 +16,7 @@ pipeline {
 
     stage('Ejecutar pruebas') {
       steps {
-        dir('/var/terraform_project/usuarios') {
+        dir('/var/terraform_project/filtro') {
           withCredentials([
             string(credentialsId: 'aws-access-key-id', variable: 'AWS_ACCESS_KEY_ID'),
             string(credentialsId: 'aws-secret-access-key', variable: 'AWS_SECRET_ACCESS_KEY')

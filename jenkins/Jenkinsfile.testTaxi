@@ -1,6 +1,10 @@
 pipeline {
   agent any
 
+  environment {
+    AWS_REGION = 'us-east-2' 
+  }
+
   stages {
     stage('Instalar dependencias') {
       steps {
@@ -13,7 +17,12 @@ pipeline {
     stage('Ejecutar pruebas') {
       steps {
         dir('/var/terraform_project/taxis') {
-          sh 'npm test'
+          withCredentials([
+            string(credentialsId: 'aws-access-key-id', variable: 'AWS_ACCESS_KEY_ID'),
+            string(credentialsId: 'aws-secret-access-key', variable: 'AWS_SECRET_ACCESS_KEY')
+          ]) {
+            sh 'npm test'
+          }
         }
       }
     }

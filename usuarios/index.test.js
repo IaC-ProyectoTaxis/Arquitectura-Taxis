@@ -1,42 +1,13 @@
 const { handler } = require("./index");
-const AWS = require("aws-sdk");
-const { v4: uuidv4 } = require("uuid");
 
-jest.mock("aws-sdk", () => {
-  const putMock = jest.fn().mockReturnValue({
-    promise: jest.fn().mockResolvedValue({}),
-  });
-
-  return {
-    DynamoDB: {
-      DocumentClient: jest.fn(() => ({
-        put: putMock,
-      })),
-    },
-  };
-});
-
-jest.mock("uuid", () => ({
-  v4: jest.fn(() => "mocked-uuid"),
-}));
-
-describe("Lambda Usuarios", () => {
-  it("responde a la preflight CORS (OPTIONS)", async () => {
-    const event = {
-      httpMethod: "OPTIONS",
-    };
-
-    const res = await handler(event);
-    expect(res.statusCode).toBe(200);
-    expect(JSON.parse(res.body)).toHaveProperty("message", "CORS preflight passed");
-  });
-
-  it("retorna 400 si faltan campos obligatorios", async () => {
+describe("Lambda Usuarios (Integración con DynamoDB AWS)", () => {
+  test("✅ debería insertar usuario válido y retornar 200", async () => {
     const event = {
       httpMethod: "POST",
       body: JSON.stringify({
-        nombre: "Ana",
-        // falta correo y contraseña
+        nombre: "Carlos Pérez",
+        correo: "carlos@example.com",
+        contraseña: "segura123"
       }),
       requestContext: {
         authorizer: {
@@ -47,41 +18,15 @@ describe("Lambda Usuarios", () => {
       }
     };
 
-    const res = await handler(event);
-    expect(res.statusCode).toBe(400);
-    expect(JSON.parse(res.body)).toHaveProperty("message", "Faltan datos obligatorios.");
+    const response = await handler(event);
+    expect(response.statusCode).toBe(200);
+    expect(JSON.parse(response.body)).toHaveProperty("message", "Datos insertados correctamente.");
   });
 
-  it("retorna 403 si el grupo no es válido", async () => {
+  test("⚠️ debería retornar 400 si faltan datos", async () => {
     const event = {
       httpMethod: "POST",
-      body: JSON.stringify({
-        nombre: "Ana",
-        correo: "ana@example.com",
-        contraseña: "secreta"
-      }),
-      requestContext: {
-        authorizer: {
-          claims: {
-            "cognito:groups": "invitado"
-          }
-        }
-      }
-    };
-
-    const res = await handler(event);
-    expect(res.statusCode).toBe(403);
-    expect(JSON.parse(res.body)).toHaveProperty("message", "No autorizado");
-  });
-
-  it("retorna 200 si los datos son válidos y el grupo es válido", async () => {
-    const event = {
-      httpMethod: "POST",
-      body: JSON.stringify({
-        nombre: "Ana",
-        correo: "ana@example.com",
-        contraseña: "secreta"
-      }),
+      body: JSON.stringify({ nombre: "Ana" }), // faltan campos
       requestContext: {
         authorizer: {
           claims: {
@@ -91,8 +36,40 @@ describe("Lambda Usuarios", () => {
       }
     };
 
-    const res = await handler(event);
-    expect(res.statusCode).toBe(200);
-    expect(JSON.parse(res.body)).toHaveProperty("message", "Datos insertados correctamente.");
+    const response = await handler(event);
+    expect(response.statusCode).toBe(400);
+    expect(JSON.parse(response.body)).toHaveProperty("message", "Faltan datos obligatorios.");
+  });
+
+  test("🚫 debería retornar 403 si el grupo no es válido", async () => {
+    const event = {
+      httpMethod: "POST",
+      body: JSON.stringify({
+        nombre: "Luis",
+        correo: "luis@example.com",
+        contraseña: "123456"
+      }),
+      requestContext: {
+        authorizer: {
+          claims: {
+            "cognito:groups": "invitado" // grupo inválido
+          }
+        }
+      }
+    };
+
+    const response = await handler(event);
+    expect(response.statusCode).toBe(403);
+    expect(JSON.parse(response.body)).toHaveProperty("message", "No autorizado");
+  });
+
+  test("🔁 debería retornar 200 para peticiones OPTIONS (CORS)", async () => {
+    const event = {
+      httpMethod: "OPTIONS"
+    };
+
+    const response = await handler(event);
+    expect(response.statusCode).toBe(200);
+    expect(JSON.parse(response.body)).toHaveProperty("message", "CORS preflight passed");
   });
 });
