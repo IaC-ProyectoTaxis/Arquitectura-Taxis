@@ -70,10 +70,10 @@ resource "aws_lambda_function" "usuarios" {
 
   vpc_config {
     subnet_ids         = [
-                          data.aws_subnet.public1-us-east-2a.id, //Definir a que subnet ira la lambda
-                          data.aws_subnet.public2-us-east-2b.id
+                          aws_subnet.public1-us-east-2a.id, //Solo 2 subnets
+                          aws_subnet.public2-us-east-2b.id
                           ]
-    security_group_ids = [data.aws_security_group.lambda_sg.id] //Definir el security group
+    security_group_ids = [aws_security_group.lambda_sg.id] //Definir el security group
   }
   
 }

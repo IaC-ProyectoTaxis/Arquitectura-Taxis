@@ -71,10 +71,9 @@ resource "aws_lambda_function" "taxis" {
 
   vpc_config {
     subnet_ids         = [
-                          data.aws_subnet.public1-us-east-2a.id, //Solo 2 subnets
-                          data.aws_subnet.public2-us-east-2b.id
+                          aws_subnet.public1-us-east-2a.id, //Solo 2 subnets                          aws_subnet.public2-us-east-2b.id
                           ]
-    security_group_ids = [data.aws_security_group.lambda_sg.id]
+    security_group_ids = [aws_security_group.lambda_sg.id]
   }
   
 }
@@ -103,14 +102,6 @@ resource "aws_iam_role_policy_attachment" "lambda_taxis_sqs_attach" {
   policy_arn = aws_iam_policy.lambda_taxis_sqs_policy.arn
 }
 
-resource "aws_security_group_rule" "allow_all_egress" {
-  type              = "egress"
-  from_port         = 0
-  to_port           = 0
-  protocol          = "-1"
-  cidr_blocks       = ["0.0.0.0/0"]
-  security_group_id = data.aws_security_group.lambda_sg.id
-}
 
 
 
@@ -138,25 +129,7 @@ resource "aws_kms_key" "lambda_taxis_key" {
 
 data "aws_caller_identity" "current" {}
 
-data "aws_subnet" "public1-us-east-2a" {
-  id = "subnet-0f3b032d13c823454"
-}
 
-data "aws_subnet" "public2-us-east-2b" {
-  id = "subnet-0a9a32b0b128ed6c3"
-}
-
-data "aws_subnet" "private1-us-east-2a" {
-  id = "subnet-0ca0a62770356adba"
-}
-
-data "aws_subnet" "private2-us-east-2b" {
-  id = "subnet-09b3130da42f77519"
-}
-
-data "aws_security_group" "lambda_sg" {
-  id = "sg-01a5fdf9b8fe18508"
-}
 
 resource "aws_lambda_permission" "allow_s3" { //Permiso para que el s3 pueda invocar el lambda
   statement_id  = "AllowS3"

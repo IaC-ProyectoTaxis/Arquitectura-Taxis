@@ -1,0 +1,37 @@
+services:
+  jenkins:
+    build:
+      context: .
+    container_name: arqui-taxis
+    user: root
+    ports:
+      - "8080:8080"
+      - "50000:50000"
+    environment:
+      - CASC_JENKINS_CONFIG=/var/jenkins_home/casc_configs/jenkins.yaml
+    volumes:
+      - jenkins_home:/var/jenkins_home
+      - ./jenkins.yaml:/var/jenkins_home/casc_configs/jenkins.yaml
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ../:/var/terraform_project
+    networks:
+      - jenkins-arqui-taxis
+
+  docker-agent:
+    image: docker:24.0.7-dind
+    container_name: docker-agent-taxis
+    privileged: true
+    environment:
+      - DOCKER_TLS_CERTDIR=""
+    ports:
+      - 2375:2375
+    networks:
+      - jenkins-arqui-taxis
+    command: ["dockerd", "--host=tcp://0.0.0.0:2375", "--host=unix:///var/run/docker.sock"]
+
+volumes:
+  jenkins_home:
+
+networks:
+  jenkins-arqui-taxis:
+    driver: bridge

@@ -19,6 +19,9 @@ resource "aws_dynamodb_table" "taxis" {
   billing_mode = "PAY_PER_REQUEST"
   hash_key     = "placa"
 
+  stream_enabled   = true
+  stream_view_type = "NEW_IMAGE"
+
   attribute {
     name = "placa"
     type = "S"
@@ -33,6 +36,9 @@ resource "aws_dynamodb_table" "viajes" {
   name         = "viajes"
   billing_mode = "PAY_PER_REQUEST"
   hash_key     = "id"
+
+  stream_enabled   = true
+  stream_view_type = "NEW_IMAGE"
 
   attribute {
     name = "id"
@@ -84,15 +90,21 @@ resource "aws_iam_role_policy_attachment" "viajes_dynamodb_attach" {
   policy_arn = aws_iam_policy.lambda_dynamodb_policy.arn
 }
 
+resource "aws_lambda_event_source_mapping" "viajes_stream_to_lambda" {
+  event_source_arn  = aws_dynamodb_table.viajes.stream_arn
+  function_name     = aws_lambda_function.filtro_notificacion.arn
+  starting_position = "LATEST"
+  batch_size        = 1
+  enabled           = true
+}
+
+
 resource "aws_vpc_endpoint" "dynamodb" {
-  vpc_id            = "vpc-0fc1da5103d68dcc7"
+  vpc_id            = aws_subnet.public1-us-east-2a.vpc_id
   service_name      = "com.amazonaws.us-east-2.dynamodb"
   vpc_endpoint_type = "Gateway"
   route_table_ids   = [
-    "rtb-0294f8f132e83410b",
-    "rtb-0c83d8a3b0bceaed4",
-    "rtb-017dca6e605994730",
-    "rtb-00f25f1ecec4f550c"
+    aws_route_table.public.id
   ]
 
   tags = {

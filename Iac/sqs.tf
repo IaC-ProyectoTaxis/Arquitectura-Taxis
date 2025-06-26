@@ -17,7 +17,7 @@ resource "aws_sqs_queue_policy" "usuarios_queue_policy" {
     Statement = [
       {
         Effect = "Allow",
-        Principal = "",
+        Principal = "*",
         Action = "sqs:SendMessage",
         Resource = aws_sqs_queue.usuarios_queue.arn,
         Condition = {
@@ -37,7 +37,7 @@ resource "aws_sqs_queue_policy" "taxis_queue_policy" {
     Statement = [
       {
         Effect = "Allow",
-        Principal = "",
+        Principal = "*",
         Action = "sqs:SendMessage",
         Resource = aws_sqs_queue.taxis_queue.arn,
         Condition = {

@@ -12,7 +12,7 @@ resource "aws_kms_key" "s3_encryption_key" {
         "Sid": "AllowRootAccountFullAccess",
         "Effect": "Allow",
         "Principal": {
-          "AWS": "arn:aws:iam::923789128997:root" 
+          "AWS": "arn:aws:iam::293210009573:root" 
         },
         "Action": "kms:*",
         "Resource": "*"
@@ -23,7 +23,7 @@ resource "aws_kms_key" "s3_encryption_key" {
 }//id de root linea 15
 
 resource "aws_s3_bucket" "bucket" {
-  bucket = "taxis-bucket"
+  bucket = "taxis-arqui"
 
   lifecycle_rule {
     id     = "log-expiration-policy"

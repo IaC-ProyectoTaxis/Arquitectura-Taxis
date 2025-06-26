@@ -1,0 +1,47 @@
+pipeline {
+    agent any
+
+    environment {
+        TF_DIR = '/var/terraform_project/Iac'
+    }
+
+    stages {
+        stage('Preparar Terraform') {
+            steps {
+                dir("${env.TF_DIR}") {
+                    sh 'terraform init'
+                }
+            }
+        }
+
+        stage('Validar') {
+            steps {
+                dir("${env.TF_DIR}") {
+                    sh 'terraform validate'
+                }
+            }
+        }
+
+        stage('Plan') {
+            steps {
+                dir("${env.TF_DIR}") {
+                    sh 'terraform plan -out=plan.tfplan'
+                }
+            }
+        }
+
+        stage('Aplicar') {
+            steps {
+                dir("${env.TF_DIR}") {
+                    sh 'terraform apply -auto-approve plan.tfplan'
+                }
+            }
+        }
+    }
+
+    post {
+        always {
+            echo 'Pipeline completado.'
+        }
+    }
+}

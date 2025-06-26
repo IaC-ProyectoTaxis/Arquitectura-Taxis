@@ -1,0 +1,5 @@
+workflow-aggregator
+git
+configuration-as-code
+docker-plugin
+generic-webhook-trigger
