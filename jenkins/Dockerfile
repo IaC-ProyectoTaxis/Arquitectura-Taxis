@@ -15,3 +15,13 @@ RUN apt-get update && apt-get install -y wget unzip && \
     unzip terraform_1.6.6_linux_amd64.zip && \
     mv terraform /usr/local/bin/ && \
     terraform --version
+
+RUN apt-get update && \
+    apt-get install -y docker.io docker-compose && \
+    usermod -aG docker jenkins
+
+RUN apt-get update && apt-get install -y curl && \
+    curl -fsSL https://deb.nodesource.com/setup_18.x | bash - && \
+    apt-get install -y nodejs
+
+USER jenkins

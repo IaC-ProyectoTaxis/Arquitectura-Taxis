@@ -1,0 +1,31 @@
+pipeline {
+    agent any
+
+    environment {
+        TF_DIR = '/var/terraform_project/Iac'
+    }
+
+    stages {
+        stage('Init') {
+            steps {
+                dir("${env.TF_DIR}") {
+                    sh 'terraform init'
+                }
+            }
+        }
+
+        stage('Destroy') {
+            steps {
+                dir("${env.TF_DIR}") {
+                    sh 'terraform destroy -auto-approve'
+                }
+            }
+        }
+    }
+
+    post {
+        always {
+            echo 'Destroy completado.'
+        }
+    }
+}

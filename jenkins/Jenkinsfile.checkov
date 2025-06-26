@@ -1,0 +1,43 @@
+pipeline {
+  agent any
+
+  environment {
+    COMPOSE_FILE = '/var/terraform_project/checkov/docker-compose.yaml'
+  }
+
+  stages {
+    stage('🔍 Ejecutar Checkov con Docker Compose') {
+      steps {
+        script {
+          echo '📦 Ejecutando Checkov...'
+          // Si existe una red vieja con conflictos, la borramos
+          sh 'docker network rm checkov_default || true'
+          // Ejecutamos checkov
+          sh 'docker-compose -f $COMPOSE_FILE up --abort-on-container-exit'
+        }
+      }
+    }
+
+    stage('📄 Publicar resultados de Checkov (JUnit)') {
+      steps {
+        script {
+          echo '🧾 Verificando archivo de resultados...'
+          sh 'ls -l /var/terraform_project/checkov/results/results.xml/results_junitxml.xml'
+          
+          echo '📄 Copiando reporte a workspace...'
+          sh 'cp /var/terraform_project/checkov/results/results.xml/results_junitxml.xml results.xml'
+          
+          echo '📄 Publicando reporte...'
+          junit 'results.xml'
+        }
+      }
+    }
+  }
+
+  post {
+    always {
+      echo '🧹 Apagando contenedor de Checkov...'
+      sh 'docker-compose -f $COMPOSE_FILE down'
+    }
+  }
+}

@@ -1,8 +1,14 @@
 {
-    "name": "taxis",
-    "version": "1.0.0",
-    "main": "index.js",
-    "dependencies": {
-        "aws-sdk": "^2.0.0"
-    }
+  "name": "taxis",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "dependencies": {
+    "aws-sdk": "^2.0.0"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0"
+  }
 }

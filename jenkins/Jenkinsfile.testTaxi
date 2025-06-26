@@ -1,0 +1,27 @@
+pipeline {
+  agent any
+
+  stages {
+    stage('Instalar dependencias') {
+      steps {
+        dir('/var/terraform_project/taxis') {
+          sh 'npm install'
+        }
+      }
+    }
+
+    stage('Ejecutar pruebas') {
+      steps {
+        dir('/var/terraform_project/taxis') {
+          sh 'npm test'
+        }
+      }
+    }
+  }
+
+  post {
+    always {
+      echo '✅ Fin del pipeline'
+    }
+  }
+}
